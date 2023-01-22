@@ -2,7 +2,7 @@ import { Fragment, React } from "react";
 import { Typography, Box, TextField, Button, Link } from "@mui/material";
 import { Stack } from "@mui/system";
 
-import { authModalContentConstants } from "../constants";
+import { authModalContentConstants } from "../Constants";
 
 const Signup = ({ setModalContent }) => {
   const handleSubmit = (event) => {
@@ -61,6 +61,7 @@ const Signup = ({ setModalContent }) => {
           sx={{
             mt: 3,
             mb: 2,
+            backgroundColor: "#4f48dd",
           }}
         >
           Create Account

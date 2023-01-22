@@ -2,16 +2,18 @@ import { useState, React } from "react";
 import { Modal, Box, Container, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { authModalContentConstants } from "../constants";
+import { authModalContentConstants } from "../Constants";
 import Login from "./Login";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
+import { ResetEmailSent } from "./ResetEmailSent";
 
-const AuthModal = ({ open, handleModalClose }) => {
-  const [modalContent, setModalContent] = useState(
-    authModalContentConstants.LOG_IN
-  );
-
+const AuthModal = ({
+  open,
+  handleModalClose,
+  modalContent,
+  setModalContent,
+}) => {
   return (
     <Modal
       open={open}
@@ -56,6 +58,9 @@ const AuthModal = ({ open, handleModalClose }) => {
         )}
         {modalContent === authModalContentConstants.FORGOT_PASSWORD && (
           <ForgotPassword setModalContent={setModalContent} />
+        )}
+        {modalContent === authModalContentConstants.RESET_EMAIL_SENT && (
+          <ResetEmailSent />
         )}
       </Container>
     </Modal>

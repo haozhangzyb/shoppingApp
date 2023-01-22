@@ -2,7 +2,7 @@ import { React } from "react";
 import { Typography, Box, TextField, Button, Link } from "@mui/material";
 import { Stack } from "@mui/system";
 
-import { authModalContentConstants } from "../constants";
+import { authModalContentConstants } from "../Constants";
 
 const ForgotPassword = ({ setModalContent }) => {
   const handleSubmit = (event) => {
@@ -11,6 +11,7 @@ const ForgotPassword = ({ setModalContent }) => {
     console.log({
       email: data.get("email"),
     });
+    setModalContent(authModalContentConstants.RESET_EMAIL_SENT);
   };
   return (
     <div>
@@ -51,6 +52,7 @@ const ForgotPassword = ({ setModalContent }) => {
           sx={{
             mt: 3,
             mb: 2,
+            backgroundColor: "#4f48dd",
           }}
         >
           Update password
