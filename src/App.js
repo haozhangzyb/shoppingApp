@@ -6,17 +6,17 @@ import "./App.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import Body from "./Body";
-import SignInModal from "./SignInModal";
+import AuthModal from "./AuthModal";
 
 function App() {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleModalOpen = () => setOpen(true);
+  const handleModalClose = () => setOpen(false);
 
   return (
     <Fragment>
-      <Header handleModalOpen={handleOpen} />
-      <SignInModal open={open} handleClose={handleClose} />
+      <Header handleModalOpen={handleModalOpen} />
+      <AuthModal open={open} handleModalClose={handleModalClose} />
       <Box
         sx={{
           height: "93vh",

@@ -6,7 +6,6 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Stack from "@mui/joy/Stack";
-// import Link from "@mui/joy/Link";
 import Link from "@mui/material/Link";
 
 const Footer = () => {
@@ -20,6 +19,7 @@ const Footer = () => {
         backgroundColor: "#111827",
         px: 4,
         color: "white",
+        width: "100vw",
       }}
     >
       <Typography variant='subtitle1'>
