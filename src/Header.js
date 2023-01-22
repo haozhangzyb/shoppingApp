@@ -99,7 +99,12 @@ const Header = ({ handleModalOpen }) => {
               >
                 Sign in
               </Button>
-              <Button startDecorator={<ShoppingCartIcon />}>$0.00</Button>
+              <Button
+                startDecorator={<ShoppingCartIcon />}
+                sx={{ paddingRight: "0 !important" }}
+              >
+                $0.00
+              </Button>
             </Box>
           </Box>
         </Toolbar>

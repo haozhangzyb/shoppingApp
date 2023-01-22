@@ -35,10 +35,11 @@ const Footer = () => {
         sm={12}
         md={4}
         lg={4}
-        order={{ xs: 3, sm: 1 }}
+        order={{ xs: 3, sm: 3, md: 1 }}
         sx={flexStyle}
+        pt={1.6}
       >
-        <Typography variant='subtitle1' mb={0}>
+        <Typography variant='subtitle1'>
           ©2022 All Rights Reserved
         </Typography>
       </Grid>
@@ -48,7 +49,7 @@ const Footer = () => {
         sm={12}
         md={4}
         lg={4}
-        order={{ xs: 1, sm: 2 }}
+        order={{ sm: 1, md: 2 }}
         sx={flexStyle}
       >
         <Stack direction='row'>
@@ -69,8 +70,9 @@ const Footer = () => {
         sm={12}
         md={4}
         lg={4}
-        order={{ xs: 2, sm: 3 }}
+        order={{ sm: 2, md: 3 }}
         sx={flexStyle}
+        pt={1.7}
       >
         <Stack direction='row' spacing={3} sx={flexStyle}>
           <Link
