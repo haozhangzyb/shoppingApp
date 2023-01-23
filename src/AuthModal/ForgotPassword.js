@@ -1,18 +1,23 @@
 import { React } from "react";
 import { Typography, Box, TextField, Button, Link } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useFormik } from "formik";
 
 import { authModalContentConstants } from "../Constants";
+import WrappedInput from "./WrappedInput";
 
-const ForgotPassword = ({ setModalContent }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-    });
-    setModalContent(authModalContentConstants.RESET_EMAIL_SENT);
-  };
+const ForgotPassword = ({ setModalContent, validationSchema }) => {
+  const formikFormData = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+      setModalContent(authModalContentConstants.RESET_EMAIL_SENT);
+    },
+  });
+
   return (
     <div>
       <Typography component='h1' variant='h5' align='center'>
@@ -27,23 +32,10 @@ const ForgotPassword = ({ setModalContent }) => {
       </Typography>
       <Box
         component='form'
-        onSubmit={handleSubmit}
+        onSubmit={formikFormData.handleSubmit}
         noValidate
-        sx={{
-          mt: 3,
-        }}
       >
-        <Typography>Email</Typography>
-
-        <TextField
-          margin='dense'
-          required
-          fullWidth
-          id='email' // label='Email Address'
-          name='email'
-          autoComplete='email'
-          autoFocus
-        />
+        <WrappedInput formikFormData={formikFormData} inputName='email' />
 
         <Button
           type='submit'

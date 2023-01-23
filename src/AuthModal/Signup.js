@@ -8,23 +8,27 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Stack } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
+import { useFormik } from "formik";
 
 import { authModalContentConstants } from "../Constants";
+import WrappedInput from "./WrappedInput";
 
-const Signup = ({ setModalContent }) => {
+const Signup = ({ setModalContent, validationSchema }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const formikFormData = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <Fragment>
       <Typography component='h1' variant='h5' align='center'>
@@ -32,38 +36,13 @@ const Signup = ({ setModalContent }) => {
       </Typography>
       <Box
         component='form'
-        onSubmit={handleSubmit}
+        onSubmit={formikFormData.handleSubmit}
         noValidate
-        sx={{
-          mt: 3,
-        }}
       >
-        <Typography>Email</Typography>
-        <TextField
-          margin='dense'
-          required
-          fullWidth
-          id='email' // label='Email Address'
-          name='email'
-          autoComplete='email'
-          autoFocus
-        />
-        <Typography
-          sx={{
-            mt: 2,
-          }}
-        >
-          Password
-        </Typography>
-        <TextField // error={true}
-          // helperText={"Incorrect password"}
-          margin='dense'
-          required
-          fullWidth
-          name='password' // label='Password'
-          type='password'
-          id='password'
-          autoComplete='current-password'
+        <WrappedInput formikFormData={formikFormData} inputName='email' />
+        <WrappedInput
+          formikFormData={formikFormData}
+          inputName='password'
         />
 
         <Button
