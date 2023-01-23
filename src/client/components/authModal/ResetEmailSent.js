@@ -1,6 +1,5 @@
 import { React } from "react";
-import { Typography, Box, TextField, Button, Link } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Typography, Box } from "@mui/material";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 
 export const ResetEmailSent = () => {

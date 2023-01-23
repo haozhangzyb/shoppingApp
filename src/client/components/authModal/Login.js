@@ -1,8 +1,7 @@
-import { Fragment, React } from "react";
+import { React } from "react";
 import {
   Typography,
   Box,
-  TextField,
   Button,
   Link,
   useMediaQuery,
@@ -14,7 +13,7 @@ import { useFormik } from "formik";
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 
-const Signup = ({ setModalContent, validationSchema }) => {
+const Login = ({ setModalContent, validationSchema }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -30,9 +29,9 @@ const Signup = ({ setModalContent, validationSchema }) => {
   });
 
   return (
-    <Fragment>
+    <div>
       <Typography component='h1' variant='h5' align='center'>
-        Sign up an account
+        Sign in to your account
       </Typography>
       <Box
         component='form'
@@ -55,7 +54,7 @@ const Signup = ({ setModalContent, validationSchema }) => {
             backgroundColor: "#4f48dd",
           }}
         >
-          Create Account
+          Sign In
         </Button>
       </Box>
 
@@ -71,17 +70,17 @@ const Signup = ({ setModalContent, validationSchema }) => {
           }}
         >
           <Typography variant='body2' display={"inline"}>
-            Already have an account?{" "}
+            Don't have an account?{" "}
           </Typography>
           <Link
             href='#'
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.LOG_IN)
+              setModalContent(authModalContentConstants.SIGN_UP)
             }
           >
-            {"Log In"}
+            {"Sign Up"}
           </Link>
         </Grid>
         <Grid
@@ -106,8 +105,8 @@ const Signup = ({ setModalContent, validationSchema }) => {
           </Link>
         </Grid>
       </Grid>
-    </Fragment>
+    </div>
   );
 };
 
-export default Signup;
+export default Login;

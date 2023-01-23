@@ -1,11 +1,10 @@
-import { IconButton, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {
   AppBar,
   Box,
   Toolbar,
   Typography,
-  InputBase,
+  Stack,
   useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";

@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { IconButton, Typography, useMediaQuery } from "@mui/material";
-import { Box } from "@mui/system";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";

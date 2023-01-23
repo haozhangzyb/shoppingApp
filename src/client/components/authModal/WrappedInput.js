@@ -15,9 +15,10 @@ const WrappedInput = ({ formikFormData, inputName }) => {
         margin='dense'
         required
         fullWidth
-        id='email'
-        name='email'
-        autoComplete='email'
+        id={inputName}
+        name={inputName}
+        autoComplete={inputName}
+        type={inputName === "password" ? "password" : "text"}
         onChange={formikFormData.handleChange}
         onBlur={formikFormData.handleBlur}
         value={formikFormData.values[inputName]}
