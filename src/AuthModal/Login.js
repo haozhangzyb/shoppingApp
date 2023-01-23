@@ -1,10 +1,22 @@
 import { React } from "react";
-import { Typography, Box, TextField, Button, Link } from "@mui/material";
+import {
+  Typography,
+  Box,
+  TextField,
+  Button,
+  Link,
+  useMediaQuery,
+} from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 import { Stack } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
 
 import { authModalContentConstants } from "../Constants";
 
 const Login = ({ setModalContent }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -13,6 +25,7 @@ const Login = ({ setModalContent }) => {
       password: data.get("password"),
     });
   };
+
   return (
     <div>
       <Typography component='h1' variant='h5' align='center'>
@@ -68,17 +81,15 @@ const Login = ({ setModalContent }) => {
         </Button>
       </Box>
 
-      <Stack
-        direction='row'
-        spacing={2}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box
+      <Grid container spacing={1}>
+        <Grid
+          item
+          xs={12}
+          sm={8}
           sx={{
-            flexGrow: 1,
+            display: "flex",
+            justifyContent: isSmallScreen ? "center" : "flex-start",
+            alignContent: "center",
           }}
         >
           <Typography variant='body2' display={"inline"}>
@@ -94,18 +105,29 @@ const Login = ({ setModalContent }) => {
           >
             {"Sign Up"}
           </Link>
-        </Box>
-        <Link
-          href='#'
-          variant='body2'
-          underline='none'
-          onClick={() =>
-            setModalContent(authModalContentConstants.FORGOT_PASSWORD)
-          }
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          sx={{
+            display: "flex",
+            justifyContent: isSmallScreen ? "center" : "flex-end",
+            alignContent: "center",
+          }}
         >
-          Forgot password?
-        </Link>
-      </Stack>
+          <Link
+            href='#'
+            variant='body2'
+            underline='none'
+            onClick={() =>
+              setModalContent(authModalContentConstants.FORGOT_PASSWORD)
+            }
+          >
+            Forgot password?
+          </Link>
+        </Grid>
+      </Grid>
     </div>
   );
 };

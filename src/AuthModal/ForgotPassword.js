@@ -58,18 +58,26 @@ const ForgotPassword = ({ setModalContent }) => {
           Update password
         </Button>
       </Box>
-
-      <Typography variant='body2' display={"inline"}>
-        Don't have an account?{" "}
-      </Typography>
-      <Link
-        href='#'
-        variant='body2'
-        underline='none'
-        onClick={() => setModalContent(authModalContentConstants.SIGN_UP)}
+      <Stack
+        direction={"row"}
+        display='flex'
+        justifyContent={"center"}
+        alignItems='center'
       >
-        {"Sign Up"}
-      </Link>
+        <Typography variant='body2' display={"inline"}>
+          Don't have an account?{" "}
+        </Typography>
+        <Link
+          href='#'
+          variant='body2'
+          underline='none'
+          onClick={() =>
+            setModalContent(authModalContentConstants.SIGN_UP)
+          }
+        >
+          {"Sign Up"}
+        </Link>
+      </Stack>
     </div>
   );
 };
