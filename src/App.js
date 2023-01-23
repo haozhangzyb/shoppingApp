@@ -3,10 +3,10 @@ import { Box } from "@mui/system";
 
 import "./App.css";
 
-import Header from "./Header";
-import Footer from "./Footer";
-import Body from "./Body";
-import AuthModal from "./AuthModal";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import Body from "./components/layout/Body";
+import AuthModal from "./components/authModal";
 
 import { authModalContentConstants } from "./Constants";
 

@@ -2,7 +2,7 @@ import { useState, React } from "react";
 import { Modal, Box, Container, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { authModalContentConstants } from "../Constants";
+import { authModalContentConstants } from "../../Constants";
 import Login from "./Login";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";

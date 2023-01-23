@@ -3,7 +3,7 @@ import { Typography, Box, TextField, Button, Link } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
 
-import { authModalContentConstants } from "../Constants";
+import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 
 const ForgotPassword = ({ setModalContent, validationSchema }) => {
