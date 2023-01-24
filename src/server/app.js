@@ -4,7 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/api/users");
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json({ extended: false }));
 // app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/test", indexRouter);
+app.use("/users", usersRouter);
 
 app.get("/", (req, res) => res.send("API Running"));
 
@@ -30,7 +30,8 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  // res.render("error");
+  res.json({ error: err });
 });
 
 module.exports = app;

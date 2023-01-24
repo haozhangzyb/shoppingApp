@@ -14,7 +14,16 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/test");
+        const res = await fetch("/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: "my@email.com",
+            password: "password",
+          }),
+        });
         const data = await res.json();
 
         console.log(data);
