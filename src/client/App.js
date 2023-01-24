@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Box } from "@mui/system";
 
 import "./App.css";
@@ -11,6 +11,20 @@ import AuthModal from "./components/authModal";
 import { authModalContentConstants } from "./Constants";
 
 function App() {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/test");
+        const data = await res.json();
+
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const [open, setOpen] = useState(false);
   const [modalContent, setModalContent] = useState(
     authModalContentConstants.LOG_IN
