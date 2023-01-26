@@ -9,13 +9,18 @@ import {
 import Grid from "@mui/material/Unstable_Grid2";
 import { useTheme } from "@mui/material/styles";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
 
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
+import { register as registerAction } from "../../actions/auth";
 
 const Signup = ({ setModalContent, validationSchema }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const authState = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
 
   const formikFormData = useFormik({
     initialValues: {
@@ -25,11 +30,14 @@ const Signup = ({ setModalContent, validationSchema }) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
+      console.log(formikFormData.values.email);
+      registerAction(values)(dispatch);
     },
   });
 
   return (
     <Fragment>
+      {/* <div>{JSON.stringify(authState)}</div> */}
       <Typography component='h1' variant='h5' align='center'>
         Sign up an account
       </Typography>

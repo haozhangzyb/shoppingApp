@@ -9,7 +9,8 @@ router.post("/", async (req, res) => {
     // console.log(req.body);
     // res.send("User route");
     const { email, password } = req.body;
-    return res.json({ message: "Registration Success!", email, password });
+    // return res.json({ message: "Registration Success!", email, password });
+    return res.json({ email });
   } catch (error) {
     return res.status(500).send("Server error");
   }
