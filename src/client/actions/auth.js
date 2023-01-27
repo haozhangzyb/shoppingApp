@@ -51,6 +51,7 @@ export const register =
       });
 
       dispatch(loadUser());
+      dispatch(closeModal());
     } catch (err) {
       console.error(err.response.data.errors);
       dispatch({

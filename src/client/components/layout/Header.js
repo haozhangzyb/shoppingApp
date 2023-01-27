@@ -6,6 +6,7 @@ import {
   Typography,
   Stack,
   useMediaQuery,
+  Skeleton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
@@ -69,6 +70,10 @@ const Header = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const AuthButton = () => {
+    if (authState.isLoading) {
+      return <p>loading...</p>;
+    }
+
     if (authState.isAuthenticated) {
       return (
         <Button
@@ -118,7 +123,10 @@ const Header = () => {
             </Stack>
             {!isSmallScreen && <SearchBox isSmallScreen={isSmallScreen} />}
 
-            <Box>
+            <Stack
+              direction={"row"}
+              sx={{ justifyContent: "center", alignItems: "center" }}
+            >
               <AuthButton />
 
               <Button
@@ -127,7 +135,7 @@ const Header = () => {
               >
                 $0.00
               </Button>
-            </Box>
+            </Stack>
           </Box>
         </Toolbar>
         {isSmallScreen && (

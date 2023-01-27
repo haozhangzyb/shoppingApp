@@ -12,7 +12,7 @@ import setAuthToken from "../utils/setAuthToken";
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
-  loading: true,
+  isLoading: true,
   user: null,
 };
 
@@ -24,7 +24,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
+        isLoading: false,
         user: payload,
       };
 
@@ -36,7 +36,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         ...payload,
         isAuthenticated: true,
-        loading: false,
+        isLoading: false,
       };
 
     case REGISTER_FAIL:
@@ -47,7 +47,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        loading: false,
+        isLoading: false,
         user: null,
       };
 
