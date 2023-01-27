@@ -15,6 +15,7 @@ import Button from "@mui/joy/Button";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout as logoutAction } from "../../actions/auth";
+import { openModal } from "../../actions/authModal";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -60,7 +61,7 @@ const SearchBox = ({ isSmallScreen }) => {
   );
 };
 
-const Header = ({ handleModalOpen }) => {
+const Header = () => {
   const authState = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
@@ -79,7 +80,10 @@ const Header = ({ handleModalOpen }) => {
     //   );
     // }
     return (
-      <Button startDecorator={<PersonIcon />} onClick={handleModalOpen}>
+      <Button
+        startDecorator={<PersonIcon />}
+        onClick={() => openModal()(dispatch)}
+      >
         Log in
       </Button>
     );

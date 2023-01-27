@@ -2,11 +2,15 @@ import { React } from "react";
 import { Typography, Box, Button, Link } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
+import { setModalContent } from "../../actions/authModal";
 
-const ForgotPassword = ({ setModalContent, validationSchema }) => {
+const ForgotPassword = ({ validationSchema }) => {
+  const dispatch = useDispatch();
+
   const formikFormData = useFormik({
     initialValues: {
       email: "",
@@ -14,7 +18,9 @@ const ForgotPassword = ({ setModalContent, validationSchema }) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-      setModalContent(authModalContentConstants.RESET_EMAIL_SENT);
+      setModalContent(authModalContentConstants.RESET_EMAIL_SENT)(
+        dispatch
+      );
     },
   });
 
@@ -64,7 +70,7 @@ const ForgotPassword = ({ setModalContent, validationSchema }) => {
           variant='body2'
           underline='none'
           onClick={() =>
-            setModalContent(authModalContentConstants.SIGN_UP)
+            setModalContent(authModalContentConstants.SIGN_UP)(dispatch)
           }
         >
           {"Sign Up"}

@@ -1,23 +1,26 @@
 import { React } from "react";
 import { Modal, Box, Container, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import * as yup from "yup";
+import { useSelector, useDispatch } from "react-redux";
 
 import { authModalContentConstants } from "../../Constants";
 import Login from "./Login";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
 import { ResetEmailSent } from "./ResetEmailSent";
+import { closeModal } from "../../actions/authModal";
 
-import * as yup from "yup";
-import { useSelector } from "react-redux";
-
-const AuthModal = ({
-  open,
-  handleModalClose,
-  modalContent,
-  setModalContent,
-}) => {
+const AuthModal = ({ setModalContent }) => {
+  const { isModalOpen, modalContent } = useSelector(
+    (state) => state.authModalReducer
+  );
+  const dispatch = useDispatch();
   const authState = useSelector((state) => state.authReducer);
+
+  const handleModalClose = () => {
+    closeModal()(dispatch);
+  };
 
   if (authState.isAuthenticated) {
     handleModalClose();
@@ -43,7 +46,7 @@ const AuthModal = ({
 
   return (
     <Modal
-      open={open}
+      open={isModalOpen}
       onClose={handleModalClose}
       disableScrollLock={true}
       sx={{
@@ -78,22 +81,13 @@ const AuthModal = ({
         </Box>
 
         {modalContent === authModalContentConstants.LOG_IN && (
-          <Login
-            setModalContent={setModalContent}
-            validationSchema={validationSchema}
-          />
+          <Login validationSchema={validationSchema} />
         )}
         {modalContent === authModalContentConstants.SIGN_UP && (
-          <Signup
-            setModalContent={setModalContent}
-            validationSchema={validationSchema}
-          />
+          <Signup validationSchema={validationSchema} />
         )}
         {modalContent === authModalContentConstants.FORGOT_PASSWORD && (
-          <ForgotPassword
-            setModalContent={setModalContent}
-            validationSchema={emailValidationSchema}
-          />
+          <ForgotPassword validationSchema={emailValidationSchema} />
         )}
         {modalContent === authModalContentConstants.RESET_EMAIL_SENT && (
           <ResetEmailSent />

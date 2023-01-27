@@ -14,8 +14,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 import { register as registerAction } from "../../actions/auth";
+import { setModalContent } from "../../actions/authModal";
 
-const Signup = ({ setModalContent, validationSchema }) => {
+const Signup = ({ validationSchema }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -85,7 +86,7 @@ const Signup = ({ setModalContent, validationSchema }) => {
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.LOG_IN)
+              setModalContent(authModalContentConstants.LOG_IN)(dispatch)
             }
           >
             {"Log In"}
@@ -106,7 +107,9 @@ const Signup = ({ setModalContent, validationSchema }) => {
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.FORGOT_PASSWORD)
+              setModalContent(authModalContentConstants.FORGOT_PASSWORD)(
+                dispatch
+              )
             }
           >
             Forgot password?

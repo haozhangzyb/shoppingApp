@@ -9,13 +9,14 @@ import {
 import Grid from "@mui/material/Unstable_Grid2";
 import { useTheme } from "@mui/material/styles";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 import { login as loginAction } from "../../actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { setModalContent } from "../../actions/authModal";
 
-const Login = ({ setModalContent, validationSchema }) => {
+const Login = ({ validationSchema }) => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -83,7 +84,7 @@ const Login = ({ setModalContent, validationSchema }) => {
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.SIGN_UP)
+              setModalContent(authModalContentConstants.SIGN_UP)(dispatch)
             }
           >
             {"Sign Up"}
@@ -104,7 +105,9 @@ const Login = ({ setModalContent, validationSchema }) => {
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.FORGOT_PASSWORD)
+              setModalContent(authModalContentConstants.FORGOT_PASSWORD)(
+                dispatch
+              )
             }
           >
             Forgot password?
