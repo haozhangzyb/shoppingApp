@@ -12,8 +12,12 @@ import { useFormik } from "formik";
 
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
+import { login as loginAction } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = ({ setModalContent, validationSchema }) => {
+  const dispatch = useDispatch();
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -25,11 +29,13 @@ const Login = ({ setModalContent, validationSchema }) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
+      loginAction(values)(dispatch);
     },
   });
 
   return (
     <div>
+      {/* <div>{JSON.stringify(authState)}</div> */}
       <Typography component='h1' variant='h5' align='center'>
         Sign in to your account
       </Typography>

@@ -29,8 +29,8 @@ const Signup = ({ setModalContent, validationSchema }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      console.log(formikFormData.values.email);
+      // console.log(values);
+      // console.log(formikFormData.values.email);
       registerAction(values)(dispatch);
     },
   });

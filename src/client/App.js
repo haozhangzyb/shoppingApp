@@ -13,36 +13,13 @@ import store from "./store";
 import { Provider } from "react-redux";
 
 function App() {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await fetch("/users", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           email: "my@email.com",
-  //           password: "password",
-  //         }),
-  //       });
-  //       const data = await res.json();
-
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  const [open, setOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(
     authModalContentConstants.LOG_IN
   );
-  const handleModalOpen = () => setOpen(true);
+  const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => {
-    setOpen(false);
+    setIsModalOpen(false);
     setModalContent(authModalContentConstants.LOG_IN);
   };
 
@@ -50,7 +27,7 @@ function App() {
     <Provider store={store}>
       <Header handleModalOpen={handleModalOpen} />
       <AuthModal
-        open={open}
+        open={isModalOpen}
         handleModalClose={handleModalClose}
         modalContent={modalContent}
         setModalContent={setModalContent}

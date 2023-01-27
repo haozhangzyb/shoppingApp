@@ -9,6 +9,7 @@ import ForgotPassword from "./ForgotPassword";
 import { ResetEmailSent } from "./ResetEmailSent";
 
 import * as yup from "yup";
+import { useSelector } from "react-redux";
 
 const AuthModal = ({
   open,
@@ -16,6 +17,12 @@ const AuthModal = ({
   modalContent,
   setModalContent,
 }) => {
+  const authState = useSelector((state) => state.authReducer);
+
+  if (authState.isAuthenticated) {
+    handleModalClose();
+  }
+
   const validationSchema = yup.object({
     email: yup
       .string("Enter your email")

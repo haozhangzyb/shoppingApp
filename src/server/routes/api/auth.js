@@ -13,7 +13,9 @@ import { secret } from "../../config/secret.js";
 router.get("/", jwtTokenToUserId, async (req, res) => {
   try {
     // get user info but filter out password
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select(
+      "-password -__v -_id"
+    );
     res.json(user);
   } catch (err) {
     console.log(err.msg);

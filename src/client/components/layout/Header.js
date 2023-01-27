@@ -10,9 +10,11 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logout as logoutAction } from "../../actions/auth";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -59,8 +61,29 @@ const SearchBox = ({ isSmallScreen }) => {
 };
 
 const Header = ({ handleModalOpen }) => {
+  const authState = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const AuthButton = () => {
+    // if (authState.isAuthenticated) {
+    //   return (
+    //     <Button
+    //       startDecorator={<PersonIcon />}
+    //       onClick={logoutAction()(dispatch)}
+    //     >
+    //       Log out
+    //     </Button>
+    //   );
+    // }
+    return (
+      <Button startDecorator={<PersonIcon />} onClick={handleModalOpen}>
+        Log in
+      </Button>
+    );
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -92,12 +115,8 @@ const Header = ({ handleModalOpen }) => {
             {!isSmallScreen && <SearchBox isSmallScreen={isSmallScreen} />}
 
             <Box>
-              <Button
-                startDecorator={<PersonIcon />}
-                onClick={handleModalOpen}
-              >
-                Sign in
-              </Button>
+              <AuthButton />
+
               <Button
                 startDecorator={<ShoppingCartIcon />}
                 sx={{ paddingRight: "0 !important" }}
