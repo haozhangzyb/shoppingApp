@@ -67,4 +67,24 @@ router.post("/", async (req, res) => {
   }
 });
 
+// @route   POST /api/auth/forgot-password
+// @desc    Send email to reset password
+// @access  Public
+router.post("/forgot-password/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+
+    // See if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "Invalid email" }] });
+    }
+
+    return res.json({ msg: "Email sent" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Server error");
+  }
+});
+
 export default router;

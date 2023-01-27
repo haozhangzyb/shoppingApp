@@ -23,6 +23,7 @@ const authModalReducer = (state = initialState, action) => {
       return {
         ...state,
         isModalOpen: false,
+        modalContent: authModalContentConstants.LOG_IN,
       };
     case SET_MODAL_CONTENT:
       return {

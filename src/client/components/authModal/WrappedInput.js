@@ -7,10 +7,12 @@ import { clearErrors } from "../../actions/auth";
 
 const WrappedInput = ({ formikFormData, inputName }) => {
   let serverErrors = useSelector((state) => state.authReducer.errors);
-  serverErrors = serverErrors.reduce((acc, curr) => {
-    acc += curr.msg;
-    return acc;
-  }, "");
+  if (serverErrors) {
+    serverErrors = serverErrors.reduce((acc, curr) => {
+      acc += curr.msg;
+      return acc;
+    }, "");
+  }
 
   const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ const WrappedInput = ({ formikFormData, inputName }) => {
         value={formikFormData.values[inputName]}
         error={
           formikFormData.touched[inputName] &&
-          Boolean(formikFormData.errors[inputName] || serverErrors.length)
+          Boolean(formikFormData.errors[inputName] || serverErrors)
         }
         helperText={
           (formikFormData.touched[inputName] &&

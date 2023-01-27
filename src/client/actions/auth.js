@@ -12,6 +12,8 @@ import {
 
 import setAuthToken from "../utils/setAuthToken";
 import { closeModal } from "./authModal";
+import { setModalContent } from "./authModal";
+import { authModalContentConstants } from "../Constants";
 
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -59,6 +61,10 @@ export const register =
         type: REGISTER_FAIL,
         payload: err.response.data.errors,
       });
+
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
     }
   };
 
@@ -105,4 +111,22 @@ export const loadingEnd = () => (dispatch) => {
 
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/api/auth/forgot-password/${email}`);
+
+    console.log(res.data);
+    dispatch(setModalContent(authModalContentConstants.RESET_EMAIL_SENT));
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.response.data.errors,
+    });
+
+    setTimeout(() => {
+      dispatch(clearErrors());
+    }, 2000);
+  }
 };
