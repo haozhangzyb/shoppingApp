@@ -2,6 +2,7 @@ import express from "express";
 
 import connectDB from "./config/connectDB.js";
 import usersRoute from "./routes/api/users.js";
+import authRoute from "./routes/api/auth.js";
 
 const app = express();
 
@@ -13,9 +14,10 @@ app.use(express.json({ extended: false }));
 
 // default route
 app.get("/", (req, res) => res.send("Project2 API Running"));
-app.use("/api/users", usersRoute);
 
 // Define Routes
+app.use("/api/users", usersRoute);
+app.use("/api/auth", authRoute);
 
 const PORT = process.env.PORT || 5001;
 

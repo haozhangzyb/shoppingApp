@@ -2,7 +2,6 @@ import express from "express";
 const router = express.Router();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import config from "config";
 
 import User from "../../models/User.js";
 import jwtTokenToUserId from "../../middleware/jwtTokenToUserId.js";
@@ -65,3 +64,5 @@ router.post("/", async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+
+export default router;

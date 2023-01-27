@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { secret } from "../config/secret";
+import { secret } from "../config/secret.js";
 
 // This middleware is to decode jwt token to user id
 export default function (req, res, next) {
