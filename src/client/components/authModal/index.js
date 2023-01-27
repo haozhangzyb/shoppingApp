@@ -11,20 +11,20 @@ import ForgotPassword from "./ForgotPassword";
 import { ResetEmailSent } from "./ResetEmailSent";
 import { closeModal } from "../../actions/authModal";
 
-const AuthModal = ({ setModalContent }) => {
+const AuthModal = () => {
   const { isModalOpen, modalContent } = useSelector(
     (state) => state.authModalReducer
   );
   const dispatch = useDispatch();
-  const authState = useSelector((state) => state.authReducer);
+  // const authState = useSelector((state) => state.authReducer);
 
   const handleModalClose = () => {
     closeModal()(dispatch);
   };
 
-  if (authState.isAuthenticated) {
-    handleModalClose();
-  }
+  // if (authState.isAuthenticated) {
+  //   handleModalClose();
+  // }
 
   const validationSchema = yup.object({
     email: yup

@@ -10,6 +10,7 @@ import {
 } from "../actions/types";
 
 import setAuthToken from "../utils/setAuthToken";
+import { closeModal } from "./authModal";
 
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -76,6 +77,7 @@ export const login =
       });
 
       dispatch(loadUser());
+      dispatch(closeModal());
     } catch (err) {
       console.error(err);
       console.error(err.response.data.errors);

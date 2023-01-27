@@ -69,16 +69,16 @@ const Header = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const AuthButton = () => {
-    // if (authState.isAuthenticated) {
-    //   return (
-    //     <Button
-    //       startDecorator={<PersonIcon />}
-    //       onClick={logoutAction()(dispatch)}
-    //     >
-    //       Log out
-    //     </Button>
-    //   );
-    // }
+    if (authState.isAuthenticated) {
+      return (
+        <Button
+          startDecorator={<PersonIcon />}
+          onClick={() => logoutAction()(dispatch)}
+        >
+          Log out
+        </Button>
+      );
+    }
     return (
       <Button
         startDecorator={<PersonIcon />}

@@ -29,7 +29,7 @@ const Login = ({ validationSchema }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       loginAction(values)(dispatch);
     },
   });
