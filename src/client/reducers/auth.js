@@ -4,8 +4,9 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
   LOGOUT,
+  LOADING_END,
+  CLEAR_ERRORS,
 } from "../actions/types";
 import setAuthToken from "../utils/setAuthToken";
 
@@ -14,6 +15,7 @@ const initialState = {
   isAuthenticated: null,
   isLoading: true,
   user: null,
+  errors: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -37,6 +39,7 @@ const authReducer = (state = initialState, action) => {
         ...payload,
         isAuthenticated: true,
         isLoading: false,
+        errors: [],
       };
 
     case REGISTER_FAIL:
@@ -44,11 +47,23 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT:
       localStorage.removeItem("token");
       setAuthToken();
+      // payload: [{msg: "Invalid credentials"}, {msg:"..."}]
       return {
         ...state,
         isAuthenticated: false,
         isLoading: false,
         user: null,
+        errors: payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: [],
+      };
+    case LOADING_END:
+      return {
+        ...state,
+        isLoading: false,
       };
 
     default:

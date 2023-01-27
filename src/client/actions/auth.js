@@ -5,8 +5,9 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
   LOGOUT,
+  LOADING_END,
+  CLEAR_ERRORS,
 } from "../actions/types";
 
 import setAuthToken from "../utils/setAuthToken";
@@ -56,6 +57,7 @@ export const register =
       console.error(err.response.data.errors);
       dispatch({
         type: REGISTER_FAIL,
+        payload: err.response.data.errors,
       });
     }
   };
@@ -83,11 +85,24 @@ export const login =
       console.error(err);
       console.error(err.response.data.errors);
       dispatch({
-        type: LOGIN_FAIL,
+        type: AUTH_ERROR,
+        payload: err.response.data.errors,
       });
+
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
     }
   };
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+};
+
+export const loadingEnd = () => (dispatch) => {
+  dispatch({ type: LOADING_END });
+};
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

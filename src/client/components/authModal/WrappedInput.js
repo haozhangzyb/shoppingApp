@@ -1,7 +1,19 @@
 import React, { Fragment } from "react";
 import { Typography, TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+
+import { useSelector } from "react-redux";
+import { clearErrors } from "../../actions/auth";
 
 const WrappedInput = ({ formikFormData, inputName }) => {
+  let serverErrors = useSelector((state) => state.authReducer.errors);
+  serverErrors = serverErrors.reduce((acc, curr) => {
+    acc += curr.msg;
+    return acc;
+  }, "");
+
+  const dispatch = useDispatch();
+
   return (
     <Fragment>
       <Typography
@@ -19,16 +31,20 @@ const WrappedInput = ({ formikFormData, inputName }) => {
         name={inputName}
         autoComplete={inputName}
         type={inputName === "password" ? "password" : "text"}
-        onChange={formikFormData.handleChange}
+        onChange={(e) => {
+          formikFormData.handleChange(e);
+          // clearErrors()(dispatch);
+        }}
         onBlur={formikFormData.handleBlur}
         value={formikFormData.values[inputName]}
         error={
           formikFormData.touched[inputName] &&
-          Boolean(formikFormData.errors[inputName])
+          Boolean(formikFormData.errors[inputName] || serverErrors.length)
         }
         helperText={
-          formikFormData.touched[inputName] &&
-          formikFormData.errors[inputName]
+          (formikFormData.touched[inputName] &&
+            formikFormData.errors[inputName]) ||
+          serverErrors
         }
       />
     </Fragment>

@@ -11,8 +11,7 @@ import AuthModal from "./components/authModal";
 
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
-import { loadUser } from "./actions/auth";
-import { logout } from "./actions/auth";
+import { loadUser, logout, loadingEnd } from "./actions/auth";
 
 function App() {
   useEffect(() => {
@@ -25,6 +24,8 @@ function App() {
       // will get a 401 response from our API
       store.dispatch(loadUser());
     }
+
+    store.dispatch(loadingEnd());
 
     // log user out from all tabs if they log out in one tab
     window.addEventListener("storage", () => {
