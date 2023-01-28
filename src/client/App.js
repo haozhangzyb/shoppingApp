@@ -45,15 +45,18 @@ function App() {
             maxWidth: "100vw",
             display: "grid",
             gridTemplateRows: "auto 1fr auto",
+            bgcolor: "#f9fafb",
           }}
         >
           <Header />
           <AuthModal />
 
-          <Routes>
-            <Route exact path='/' element={<ProductList />} />
-            <Route exact path='/addProduct' element={<AddProduct />} />
-          </Routes>
+          <Box my={3}>
+            <Routes>
+              <Route exact path='/' element={<ProductList />} />
+              <Route exact path='/addProduct' element={<AddProduct />} />
+            </Routes>
+          </Box>
 
           <Footer />
         </Box>

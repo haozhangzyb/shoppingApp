@@ -10,3 +10,18 @@ export const productListSortMenuItems = {
   PRICE_HIGH_TO_LOW: "Price: High to Low",
   LAST_ADDED: "Last Added",
 };
+
+export const addProductFormFields = {
+  PRODUCT_NAME: "Product Name",
+  PRODUCT_DESCRIPTION: "Product Description",
+  CATEGORY: "Category",
+  CATEGORIES: {
+    ELECTRONICS: "Electronics",
+    CLOTHING: "Clothing",
+    HOME: "Home",
+  },
+  PRICE: "Price",
+  IN_STOCK_QUANTITY: "In Stock Quantity",
+  ADD_IMAGE_LINK: "Add Image Link",
+  ADD_PRODUCT: "Add Product",
+};

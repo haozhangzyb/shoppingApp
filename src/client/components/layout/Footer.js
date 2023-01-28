@@ -25,7 +25,6 @@ const Footer = () => {
         ...flexStyle,
         height: isSmallScreen ? "15vh" : "10vh",
         backgroundColor: "#111827",
-        mt: 4,
         color: "white",
         // width: "100.4vw",
         // position: "fixed",

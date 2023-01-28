@@ -37,7 +37,7 @@ const ProductList = () => {
         justifyContent: "center",
       }}
     >
-      <Grid xs={11} bgcolor='##f9fafb'>
+      <Grid xs={11}>
         <ListHeader
           sortMenuValue={sortMenuValue}
           handleChange={handleChange}
