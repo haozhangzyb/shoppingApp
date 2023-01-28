@@ -12,6 +12,7 @@ import AuthModal from "./components/authModal";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser, logout, loadingEnd } from "./actions/auth";
+import ProductList from "./components/productList";
 
 function App() {
   useEffect(() => {
@@ -37,9 +38,9 @@ function App() {
     <Provider store={store}>
       <Header />
       <AuthModal />
-      <Box
+      {/* <Box
         sx={{
-          height: "93vh",
+          height: "80vh",
           display: "flex",
           flexDirection: "column",
           width: "100%",
@@ -47,8 +48,11 @@ function App() {
         }}
       >
         <Body />
-        <Footer />
-      </Box>
+      </Box> */}
+      {/* <Box sx={{ pb: 20 }}> */}
+      <ProductList />
+      {/* </Box> */}
+      <Footer />
     </Provider>
   );
 }

@@ -1,0 +1,68 @@
+import {
+  Typography,
+  MenuItem,
+  FormControl,
+  Select,
+  Button,
+} from "@mui/material";
+import { Box, Stack } from "@mui/system";
+import { productListSortMenuItems } from "../../Constants";
+
+const ListHeader = (props) => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignContent: "flex-end",
+      }}
+    >
+      <Typography
+        variant='h5'
+        sx={{
+          my: "auto",
+        }}
+      >
+        Products
+      </Typography>
+      <Stack direction='row'>
+        <FormControl
+          sx={{
+            m: 1,
+          }}
+          size='small'
+        >
+          <Select
+            id='demo-simple-select'
+            value={props.sortMenuValue}
+            onChange={props.handleChange}
+            sx={{
+              width: 180,
+            }}
+          >
+            <MenuItem value={productListSortMenuItems.LAST_ADDED}>
+              {productListSortMenuItems.LAST_ADDED}
+            </MenuItem>
+            <MenuItem value={productListSortMenuItems.PRICE_HIGH_TO_LOW}>
+              {productListSortMenuItems.PRICE_HIGH_TO_LOW}
+            </MenuItem>
+            <MenuItem value={productListSortMenuItems.PRICE_LOW_TO_HIGH}>
+              {productListSortMenuItems.PRICE_LOW_TO_HIGH}
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <Button
+          variant='contained'
+          sx={{
+            bgcolor: "#4f48dd",
+            m: 1,
+            textTransform: "none",
+          }}
+        >
+          Add Product
+        </Button>
+      </Stack>
+    </Box>
+  );
+};
+export default ListHeader;
