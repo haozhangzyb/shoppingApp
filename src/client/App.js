@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Provider } from "react-redux";
 import { Box } from "@mui/system";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 
@@ -13,6 +14,7 @@ import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser, logout, loadingEnd } from "./actions/auth";
 import ProductList from "./components/productList";
+import AddProduct from "./components/productList/AddProduct";
 
 function App() {
   useEffect(() => {
@@ -36,9 +38,10 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Header />
-      <AuthModal />
-      {/* <Box
+      <BrowserRouter>
+        <Header />
+        <AuthModal />
+        {/* <Box
         sx={{
           height: "80vh",
           display: "flex",
@@ -49,10 +52,14 @@ function App() {
       >
         <Body />
       </Box> */}
-      {/* <Box sx={{ pb: 20 }}> */}
-      <ProductList />
-      {/* </Box> */}
-      <Footer />
+        {/* <Box sx={{ pb: 20 }}> */}
+        <Routes>
+          <Route exact path='/' element={<ProductList />} />
+          <Route exact path='/addProduct' element={<AddProduct />} />
+        </Routes>
+        {/* </Box> */}
+        <Footer />
+      </BrowserRouter>
     </Provider>
   );
 }

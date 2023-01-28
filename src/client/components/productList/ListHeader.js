@@ -6,9 +6,11 @@ import {
   Button,
 } from "@mui/material";
 import { Box, Stack } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import { productListSortMenuItems } from "../../Constants";
 
 const ListHeader = (props) => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -58,6 +60,7 @@ const ListHeader = (props) => {
             m: 1,
             textTransform: "none",
           }}
+          onClick={() => navigate("/addProduct")}
         >
           Add Product
         </Button>
