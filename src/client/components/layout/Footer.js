@@ -29,7 +29,7 @@ const Footer = () => {
         color: "white",
         // width: "100.4vw",
         // position: "fixed",
-        // bottom: 0,
+        bottom: 0,
       }}
     >
       <Grid

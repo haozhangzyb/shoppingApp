@@ -39,26 +39,28 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header />
-        <AuthModal />
-        {/* <Box
-        sx={{
-          height: "80vh",
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          // bgcolor: "#a2a8d3",
-        }}
-      >
-        <Body />
-      </Box> */}
-        {/* <Box sx={{ pb: 20 }}> */}
-        <Routes>
-          <Route exact path='/' element={<ProductList />} />
-          <Route exact path='/addProduct' element={<AddProduct />} />
-        </Routes>
-        {/* </Box> */}
-        <Footer />
+        <Box
+          sx={{
+            minHeight: "100vh",
+            maxWidth: "100vw",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Header />
+          <AuthModal />
+
+          <Box sx={{ flex: "1 0 auto" }}>
+            <Routes>
+              <Route exact path='/' element={<ProductList />} />
+              <Route exact path='/addProduct' element={<AddProduct />} />
+            </Routes>
+          </Box>
+
+          <Box sx={{ flexShrink: 0 }}>
+            <Footer />
+          </Box>
+        </Box>
       </BrowserRouter>
     </Provider>
   );
