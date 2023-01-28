@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   CardMedia,
+  Stack,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -9,6 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import { useParams } from "react-router-dom";
+import AddToCartButton from "../productList/AddToCartButton";
 
 import previewPlaceholder from "../productList/image-preview-placeholder.jpg";
 
@@ -57,15 +59,22 @@ const ProductDetail = () => {
             sequi voluptas repudiandae sed obcaecati minima similique
             voluptatum dolores aliquid deserunt.
           </Typography>
-          <Button
+          {/* <Button
             variant='contained'
             sx={{ mr: 3, textTransform: "none", bgcolor: "#4f48dd" }}
           >
             Add to cart
-          </Button>
-          <Button variant='outlined' sx={{ textTransform: "none" }}>
-            Edit
-          </Button>
+          </Button> */}
+          <Stack direction={"row"} spacing={2}>
+            <AddToCartButton sx={{ maxWidth: 100 }} />
+            <Button
+              variant='outlined'
+              size='small'
+              sx={{ textTransform: "none", width: 100 }}
+            >
+              Edit
+            </Button>
+          </Stack>
         </Grid2>
       </Grid2>
     </Box>

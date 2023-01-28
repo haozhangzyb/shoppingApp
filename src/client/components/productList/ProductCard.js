@@ -8,6 +8,48 @@ import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
+import AddToCartButton from "./AddToCartButton";
+
+// function AddToCartButton() {
+//   return (
+//     <ButtonGroup
+//       variant='contained'
+//       aria-label='outlined primary button group'
+//       size='small'
+//       sx={{
+//         bgcolor: "#4f48dd",
+//         color: "white",
+//         width: "48%",
+//         display: "flex",
+//         justifyContent: "space-between",
+//       }}
+//     >
+//       <Button
+//         sx={{
+//           bgcolor: "#4f48dd",
+//           borderStyle: "none !important",
+//         }}
+//       >
+//         -
+//       </Button>
+//       <Typography
+//         sx={{
+//           my: "auto",
+//         }}
+//       >
+//         1
+//       </Typography>
+//       <Button
+//         sx={{
+//           bgcolor: "#4f48dd",
+//         }}
+//       >
+//         +
+//       </Button>
+//     </ButtonGroup>
+//   );
+// }
+
 const ProductCard = () => {
   return (
     <Card
@@ -34,26 +76,7 @@ const ProductCard = () => {
       <CardActions
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
-        <ButtonGroup
-          variant='contained'
-          aria-label='outlined primary button group'
-          size='small'
-          sx={{
-            bgcolor: "#4f48dd",
-            color: "white",
-            width: "48%",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Button
-            sx={{ bgcolor: "#4f48dd", borderStyle: "none !important" }}
-          >
-            -
-          </Button>
-          <Typography sx={{ my: "auto" }}>1</Typography>
-          <Button sx={{ bgcolor: "#4f48dd" }}>+</Button>
-        </ButtonGroup>
+        <AddToCartButton />
         <Button
           variant='contained'
           sx={{ bgcolor: "#4f48dd", width: "48%" }}
