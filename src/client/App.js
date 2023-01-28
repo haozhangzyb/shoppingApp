@@ -15,6 +15,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { loadUser, logout, loadingEnd } from "./actions/auth";
 import ProductList from "./components/productList";
 import AddProduct from "./components/productList/AddProduct";
+import ProductDetail from "./components/productDetail";
 
 function App() {
   useEffect(() => {
@@ -55,6 +56,11 @@ function App() {
             <Routes>
               <Route exact path='/' element={<ProductList />} />
               <Route exact path='/addProduct' element={<AddProduct />} />
+              <Route
+                exact
+                path='/product/:id'
+                element={<ProductDetail />}
+              />
             </Routes>
           </Box>
 
