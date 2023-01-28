@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { logout as logoutAction } from "../../actions/auth";
 import { openModal } from "../../actions/authModal";
+import { useNavigate } from "react-router-dom";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -63,6 +64,7 @@ const SearchBox = ({ isSmallScreen }) => {
 };
 
 const Header = () => {
+  const navigate = useNavigate();
   const authState = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
@@ -110,6 +112,9 @@ const Header = () => {
               alignItems='flex-end'
               spacing={1}
               mr={2}
+              onClick={() => {
+                navigate("/");
+              }}
               // flexGrow={1}
             >
               {isSmallScreen ? (
