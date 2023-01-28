@@ -43,23 +43,19 @@ function App() {
           sx={{
             minHeight: "100vh",
             maxWidth: "100vw",
-            display: "flex",
-            flexDirection: "column",
+            display: "grid",
+            gridTemplateRows: "auto 1fr auto",
           }}
         >
           <Header />
           <AuthModal />
 
-          <Box sx={{ flex: "1 0 auto" }}>
-            <Routes>
-              <Route exact path='/' element={<ProductList />} />
-              <Route exact path='/addProduct' element={<AddProduct />} />
-            </Routes>
-          </Box>
+          <Routes>
+            <Route exact path='/' element={<ProductList />} />
+            <Route exact path='/addProduct' element={<AddProduct />} />
+          </Routes>
 
-          <Box sx={{ flexShrink: 0 }}>
-            <Footer />
-          </Box>
+          <Footer />
         </Box>
       </BrowserRouter>
     </Provider>
