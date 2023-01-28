@@ -175,7 +175,9 @@ const AddProduct = () => {
             <Grid2 item xs={12} sm={9}>
               <CardMedia
                 sx={{
-                  height: 200,
+                  height: 250,
+                  backgroundSize: "contain",
+                  border: "1px dashed #c4c4c4",
                 }}
                 image={previewImage}
               />
