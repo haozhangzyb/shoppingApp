@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
-const AddToCartButton = ({ sx }) => {
+const AddToCartButton = ({ sx, inCartNumber }) => {
   return (
     <ButtonGroup
       variant='contained'
@@ -31,7 +31,7 @@ const AddToCartButton = ({ sx }) => {
           my: "auto",
         }}
       >
-        1
+        {inCartNumber}
       </Typography>
       <Button
         sx={{

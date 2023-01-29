@@ -13,12 +13,15 @@ import { useParams } from "react-router-dom";
 import AddToCartButton from "../productList/AddToCartButton";
 
 import previewPlaceholder from "../productList/image-preview-placeholder.jpg";
+import { productObjPlaceholders } from "../../Constants";
 
 const ProductDetail = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { id } = useParams();
+  const productObj = productObjPlaceholders.find((obj) => obj.id === id);
+
   return (
     <Box sx={{ maxWidth: 1100, mx: "auto", width: "90%" }}>
       <Typography variant='h5'>Product Detail</Typography>
@@ -40,24 +43,21 @@ const ProductDetail = () => {
               backgroundSize: "contain",
               border: "1px dashed #c4c4c4",
             }}
-            image={previewPlaceholder}
+            image={productObj.image_url || previewPlaceholder}
           />
         </Grid2>
         <Grid2 item xs={12} sm={6} pt={4}>
           <Typography variant='body1' color={"#6c727f"} mb={1}>
-            Category
+            {productObj.category}
           </Typography>
           <Typography variant='h5' color={"#535353"} mb={2}>
-            Meta Quest2 VR headset
+            {productObj.name}
           </Typography>
           <Typography variant='h5' mb={2}>
-            $299
+            ${productObj.price}
           </Typography>
           <Typography variant='body1' color={"#535353"} mb={5}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-            aspernatur ipsa quos ex, quisquam laborum molestias quae id vel
-            sequi voluptas repudiandae sed obcaecati minima similique
-            voluptatum dolores aliquid deserunt.
+            {productObj.description}
           </Typography>
           {/* <Button
             variant='contained'
@@ -66,7 +66,7 @@ const ProductDetail = () => {
             Add to cart
           </Button> */}
           <Stack direction={"row"} spacing={2}>
-            <AddToCartButton sx={{ maxWidth: 100 }} />
+            <AddToCartButton sx={{ maxWidth: 100 }} inCartNumber={1} />
             <Button
               variant='outlined'
               size='small'

@@ -25,3 +25,28 @@ export const addProductFormFields = {
   ADD_IMAGE_LINK: "Add Image Link",
   ADD_PRODUCT: "Add Product",
 };
+
+export const productObjPlaceholders = [
+  {
+    id: "fakeProductId1",
+    name: "Meta Quest2 VR headset",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum maxime soluta ipsa debitis necessitatibus odit quis provident iste, consectetur ut consequuntur? In iure excepturi, voluptate dicta minus voluptas autem aperiam?",
+    category: "Electronics",
+    price: 299,
+    quantity: 10,
+    image_url:
+      "https://i5.walmartimages.com/asr/a3f2ba01-e689-4e38-b062-822d3aeec909.c960f6f5b1d66040c30ac62c61441fde.jpeg",
+  },
+  {
+    id: "fakeProductId2",
+    name: "Long Sleeve Jacket",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum maxime soluta ipsa debitis necessitatibus odit quis provident iste, consectetur ut consequuntur? In iure excepturi, voluptate dicta minus voluptas autem aperiam?",
+    category: "Clothing",
+    price: 25.63,
+    quantity: 10,
+    image_url:
+      "https://i5.walmartimages.com/asr/9a4042e9-7a4c-49dd-8ff9-96379f94b3db_2.df3fc7faa6909311f7f5306763bf312a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+  },
+];

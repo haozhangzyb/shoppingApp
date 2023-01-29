@@ -19,14 +19,11 @@ import { addProductFormFields } from "../../Constants";
 import previewPlaceholder from "./image-preview-placeholder.jpg";
 
 const AddProduct = () => {
-  const [categoryValues, setCategoryValues] = useState(
-    addProductFormFields.CATEGORIES.CLOTHING
-  );
-
   const formikFormData = useFormik({
     initialValues: {
       name: "",
       description: "",
+      category: addProductFormFields.CATEGORIES.CLOTHING,
       price: 0,
       quantity: 0,
       image_url: "",
@@ -89,8 +86,9 @@ const AddProduct = () => {
               >
                 <Select
                   id='demo-simple-select'
-                  value={categoryValues}
-                  onChange={(e) => setCategoryValues(e.target.value)}
+                  name='category'
+                  value={formikFormData.values.category}
+                  onChange={formikFormData.handleChange}
                   sx={{
                     width: "100%",
                   }}

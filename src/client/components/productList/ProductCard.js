@@ -7,50 +7,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { useNavigate } from "react-router-dom";
 
 import AddToCartButton from "./AddToCartButton";
+import previewPlaceholder from "./image-preview-placeholder.jpg";
 
-// function AddToCartButton() {
-//   return (
-//     <ButtonGroup
-//       variant='contained'
-//       aria-label='outlined primary button group'
-//       size='small'
-//       sx={{
-//         bgcolor: "#4f48dd",
-//         color: "white",
-//         width: "48%",
-//         display: "flex",
-//         justifyContent: "space-between",
-//       }}
-//     >
-//       <Button
-//         sx={{
-//           bgcolor: "#4f48dd",
-//           borderStyle: "none !important",
-//         }}
-//       >
-//         -
-//       </Button>
-//       <Typography
-//         sx={{
-//           my: "auto",
-//         }}
-//       >
-//         1
-//       </Typography>
-//       <Button
-//         sx={{
-//           bgcolor: "#4f48dd",
-//         }}
-//       >
-//         +
-//       </Button>
-//     </ButtonGroup>
-//   );
-// }
+const ProductCard = ({ productObj }) => {
+  const navigate = useNavigate();
 
-const ProductCard = () => {
   return (
     <Card
       sx={{
@@ -59,24 +23,25 @@ const ProductCard = () => {
         border: "1px solid #cccccc",
         borderRadius: "5px",
       }}
+      onClick={() => navigate(`/product/${productObj.id}`)}
     >
       <CardMedia
-        sx={{ height: 200, mx: 1, mt: 1 }}
-        // image='/static/images/cards/contemplative-reptile.jpg'
-        image='https://mui.com/static/images/cards/contemplative-reptile.jpg'
+        sx={{ height: 200, mx: 1, mt: 1, backgroundSize: "contain" }}
+        // image='https://mui.com/static/images/cards/contemplative-reptile.jpg'
+        image={productObj.image_url || previewPlaceholder}
       />
       <CardContent>
         <Typography variant='body' color='text.secondary'>
-          Phone
+          {productObj.name}
         </Typography>
         <Typography variant='body' component='div'>
-          $499.99
+          ${productObj.price}
         </Typography>
       </CardContent>
       <CardActions
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
-        <AddToCartButton />
+        <AddToCartButton inCartNumber={1} />
         <Button
           variant='contained'
           sx={{ bgcolor: "#4f48dd", width: "48%" }}
