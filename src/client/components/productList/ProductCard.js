@@ -23,14 +23,14 @@ const ProductCard = ({ productObj }) => {
         border: "1px solid #cccccc",
         borderRadius: "5px",
       }}
-      onClick={() => navigate(`/product/${productObj.id}`)}
     >
       <CardMedia
         sx={{ height: 200, mx: 1, mt: 1, backgroundSize: "contain" }}
         // image='https://mui.com/static/images/cards/contemplative-reptile.jpg'
         image={productObj.image_url || previewPlaceholder}
+        onClick={() => navigate(`/product/${productObj.id}`)}
       />
-      <CardContent>
+      <CardContent onClick={() => navigate(`/product/${productObj.id}`)}>
         <Typography variant='body' color='text.secondary'>
           {productObj.name}
         </Typography>
@@ -46,6 +46,7 @@ const ProductCard = ({ productObj }) => {
           variant='contained'
           sx={{ bgcolor: "#4f48dd", width: "48%" }}
           size='small'
+          onClick={() => navigate(`/editProduct/${productObj.id}`)}
         >
           Edit
         </Button>

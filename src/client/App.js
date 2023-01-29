@@ -56,11 +56,16 @@ function App() {
           <Box my={3}>
             <Routes>
               <Route exact path='/' element={<ProductList />} />
-              <Route exact path='/addProduct' element={<AddProduct />} />
               <Route
                 exact
                 path='/product/:id'
                 element={<ProductDetail />}
+              />
+              <Route exact path='/addProduct' element={<AddProduct />} />
+              <Route
+                exact
+                path='/editProduct/:id'
+                element={<AddProduct isEditingProduct={true} />}
               />
               <Route path='*' element={<ErrorPage />} />
             </Routes>

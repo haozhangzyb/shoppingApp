@@ -17,23 +17,52 @@ import { useFormik } from "formik";
 
 import { addProductFormFields } from "../../Constants";
 import previewPlaceholder from "./image-preview-placeholder.jpg";
+import { productObjPlaceholders } from "../../Constants";
+import { useParams } from "react-router-dom";
 
-const AddProduct = () => {
-  const formikFormData = useFormik({
-    initialValues: {
+const AddProduct = ({ isEditingProduct }) => {
+  let initialValues;
+  let onSubmit;
+
+  const { id } = useParams();
+  if (isEditingProduct) {
+    const productObj = productObjPlaceholders.find((obj) => obj.id === id);
+    initialValues = {
+      name: productObj.name,
+      description: productObj.description,
+      category: productObj.category,
+      price: productObj.price,
+      quantity: productObj.quantity,
+      image_url: productObj.image_url,
+    };
+
+    onSubmit = (values) => {
+      console.log(values);
+    };
+  } else {
+    initialValues = {
       name: "",
       description: "",
       category: addProductFormFields.CATEGORIES.CLOTHING,
       price: 0,
       quantity: 0,
       image_url: "",
-    },
-    onSubmit: (values) => {
+    };
+    onSubmit = (values) => {
       console.log(values);
-    },
+    };
+  }
+
+  const formikFormData = useFormik({
+    initialValues,
+    onSubmit: (values) => onSubmit(values),
   });
 
-  const [previewImage, setPreviewImage] = useState(previewPlaceholder);
+  const [previewImage, setPreviewImage] = useState(
+    formikFormData.values.image_url
+      ? formikFormData.values.image_url
+      : previewPlaceholder
+  );
   return (
     <Grid2 container justifyContent={"center"}>
       <Grid2 xs={11} maxWidth={700}>

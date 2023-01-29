@@ -9,7 +9,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AddToCartButton from "../productList/AddToCartButton";
 
 import previewPlaceholder from "../productList/image-preview-placeholder.jpg";
@@ -17,6 +17,8 @@ import { productObjPlaceholders } from "../../Constants";
 import ErrorPage from "../ErrorPage";
 
 const ProductDetail = () => {
+  const navigate = useNavigate();
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -74,6 +76,7 @@ const ProductDetail = () => {
               variant='outlined'
               size='small'
               sx={{ textTransform: "none", width: 100 }}
+              onClick={() => navigate(`/editProduct/${productObj.id}`)}
             >
               Edit
             </Button>
