@@ -18,9 +18,11 @@ import { useFormik } from "formik";
 import { addProductFormFields } from "../../Constants";
 import previewPlaceholder from "./image-preview-placeholder.jpg";
 import { productObjPlaceholders } from "../../Constants";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddProduct = ({ isEditingProduct }) => {
+  const navigate = useNavigate();
+
   let initialValues;
   let onSubmit;
 
@@ -225,26 +227,40 @@ const AddProduct = ({ isEditingProduct }) => {
                   color: "white",
                   height: 40,
                   textTransform: "none",
-                  mr: 2,
+                  mr: 1,
                 }}
                 onClick={formikFormData.handleSubmit}
               >
                 {addProductFormFields.ADD_PRODUCT}
               </Button>
               <Button
-                type='submit'
                 variant='outlined'
                 sx={{
-                  bgcolor: "#e15241",
-                  color: "white",
+                  // bgcolor: "#e15241",
+                  // color: "white",
                   height: 40,
                   textTransform: "none",
-                  border: "none",
+                  mr: 1,
                 }}
-                // onClick={formikFormData.handleSubmit}
+                onClick={() => navigate(-1)}
               >
-                {addProductFormFields.DELETE_PRODUCT}
+                {addProductFormFields.CANCEL}
               </Button>
+
+              {isEditingProduct && (
+                <Button
+                  variant='contained'
+                  sx={{
+                    bgcolor: "#e15241",
+                    color: "white",
+                    height: 40,
+                    textTransform: "none",
+                  }}
+                  // onClick={formikFormData.handleSubmit}
+                >
+                  {addProductFormFields.DELETE_PRODUCT}
+                </Button>
+              )}
             </Grid2>
           </Grid2>
         </Box>

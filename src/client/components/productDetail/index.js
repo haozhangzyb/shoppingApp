@@ -64,12 +64,6 @@ const ProductDetail = () => {
           <Typography variant='body1' color={"#535353"} mb={5}>
             {productObj.description}
           </Typography>
-          {/* <Button
-            variant='contained'
-            sx={{ mr: 3, textTransform: "none", bgcolor: "#4f48dd" }}
-          >
-            Add to cart
-          </Button> */}
           <Stack direction={"row"} spacing={2}>
             <AddToCartButton sx={{ maxWidth: 100 }} inCartNumber={1} />
             <Button
@@ -81,15 +75,13 @@ const ProductDetail = () => {
               Edit
             </Button>
             <Button
-              type='submit'
-              variant='outlined'
+              variant='contained'
               sx={{
                 bgcolor: "#e15241",
                 color: "white",
                 height: 40,
                 width: 100,
                 textTransform: "none",
-                border: "none",
               }}
               // onClick={formikFormData.handleSubmit}
             >

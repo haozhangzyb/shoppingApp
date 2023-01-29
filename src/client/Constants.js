@@ -23,8 +23,9 @@ export const addProductFormFields = {
   PRICE: "Price",
   IN_STOCK_QUANTITY: "In Stock Quantity",
   ADD_IMAGE_LINK: "Add Image Link",
-  ADD_PRODUCT: "Add Product",
-  DELETE_PRODUCT: "Delete Product",
+  ADD_PRODUCT: "Add",
+  CANCEL: "Cancel",
+  DELETE_PRODUCT: "Delete",
 };
 
 export const productObjPlaceholders = [
