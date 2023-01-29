@@ -15,7 +15,24 @@ const ProductList = () => {
   );
 
   const productsPlaceholder = () => {
-    return productObjPlaceholders.map((productObj) => {
+    let sortedProducts;
+    if (sortMenuValue === productListSortMenuItems.PRICE_HIGH_TO_LOW) {
+      sortedProducts = productObjPlaceholders.sort((a, b) => {
+        return b.price - a.price;
+      });
+    } else if (
+      sortMenuValue === productListSortMenuItems.PRICE_LOW_TO_HIGH
+    ) {
+      sortedProducts = productObjPlaceholders.sort((a, b) => {
+        return a.price - b.price;
+      });
+    } else if (sortMenuValue === productListSortMenuItems.LAST_ADDED) {
+      sortedProducts = productObjPlaceholders.sort((a, b) => {
+        return b.createdAt - a.createdAt;
+      });
+    }
+
+    return sortedProducts.map((productObj) => {
       return (
         <Grid item xs={12} sm={6} md={4} lg={2.4} key={productObj.id}>
           <ProductCard productObj={productObj} />
