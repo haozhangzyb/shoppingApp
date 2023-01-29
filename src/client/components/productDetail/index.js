@@ -14,6 +14,7 @@ import AddToCartButton from "../productList/AddToCartButton";
 
 import previewPlaceholder from "../productList/image-preview-placeholder.jpg";
 import { productObjPlaceholders } from "../../Constants";
+import ErrorPage from "../ErrorPage";
 
 const ProductDetail = () => {
   const theme = useTheme();
@@ -21,6 +22,8 @@ const ProductDetail = () => {
 
   const { id } = useParams();
   const productObj = productObjPlaceholders.find((obj) => obj.id === id);
+
+  if (!productObj) return <ErrorPage />;
 
   return (
     <Box sx={{ maxWidth: 1100, mx: "auto", width: "90%" }}>

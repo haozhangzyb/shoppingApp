@@ -16,6 +16,7 @@ import { loadUser, logout, loadingEnd } from "./actions/auth";
 import ProductList from "./components/productList";
 import AddProduct from "./components/productList/AddProduct";
 import ProductDetail from "./components/productDetail";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   useEffect(() => {
@@ -61,6 +62,7 @@ function App() {
                 path='/product/:id'
                 element={<ProductDetail />}
               />
+              <Route path='*' element={<ErrorPage />} />
             </Routes>
           </Box>
 
