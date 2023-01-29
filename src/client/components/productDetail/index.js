@@ -23,7 +23,7 @@ const ProductDetail = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { id } = useParams();
-  const productObj = productObjPlaceholders.find((obj) => obj.id === id);
+  const productObj = productObjPlaceholders.find((obj) => obj._id === id);
 
   if (!productObj) return <ErrorPage />;
 
@@ -76,9 +76,24 @@ const ProductDetail = () => {
               variant='outlined'
               size='small'
               sx={{ textTransform: "none", width: 100 }}
-              onClick={() => navigate(`/editProduct/${productObj.id}`)}
+              onClick={() => navigate(`/editProduct/${productObj._id}`)}
             >
               Edit
+            </Button>
+            <Button
+              type='submit'
+              variant='outlined'
+              sx={{
+                bgcolor: "#e15241",
+                color: "white",
+                height: 40,
+                width: 100,
+                textTransform: "none",
+                border: "none",
+              }}
+              // onClick={formikFormData.handleSubmit}
+            >
+              Delete
             </Button>
           </Stack>
         </Grid2>

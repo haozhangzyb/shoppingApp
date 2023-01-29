@@ -26,7 +26,9 @@ const AddProduct = ({ isEditingProduct }) => {
 
   const { id } = useParams();
   if (isEditingProduct) {
-    const productObj = productObjPlaceholders.find((obj) => obj.id === id);
+    const productObj = productObjPlaceholders.find(
+      (obj) => obj._id === id
+    );
     initialValues = {
       name: productObj.name,
       description: productObj.description,
@@ -210,7 +212,11 @@ const AddProduct = ({ isEditingProduct }) => {
               />
             </Grid2>
 
-            <Grid2 item xs={12}>
+            <Grid2
+              item
+              xs={12}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <Button
                 type='submit'
                 variant='contained'
@@ -219,10 +225,25 @@ const AddProduct = ({ isEditingProduct }) => {
                   color: "white",
                   height: 40,
                   textTransform: "none",
+                  mr: 2,
                 }}
                 onClick={formikFormData.handleSubmit}
               >
                 {addProductFormFields.ADD_PRODUCT}
+              </Button>
+              <Button
+                type='submit'
+                variant='outlined'
+                sx={{
+                  bgcolor: "#e15241",
+                  color: "white",
+                  height: 40,
+                  textTransform: "none",
+                  border: "none",
+                }}
+                // onClick={formikFormData.handleSubmit}
+              >
+                {addProductFormFields.DELETE_PRODUCT}
               </Button>
             </Grid2>
           </Grid2>

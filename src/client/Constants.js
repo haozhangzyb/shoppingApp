@@ -24,11 +24,12 @@ export const addProductFormFields = {
   IN_STOCK_QUANTITY: "In Stock Quantity",
   ADD_IMAGE_LINK: "Add Image Link",
   ADD_PRODUCT: "Add Product",
+  DELETE_PRODUCT: "Delete Product",
 };
 
 export const productObjPlaceholders = [
   {
-    id: "fakeProductId1",
+    _id: "fakeProductId1",
     name: "Meta Quest2 VR headset",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum maxime soluta ipsa debitis necessitatibus odit quis provident iste, consectetur ut consequuntur? In iure excepturi, voluptate dicta minus voluptas autem aperiam?",
@@ -41,7 +42,7 @@ export const productObjPlaceholders = [
     updatedAt: "1674993807817",
   },
   {
-    id: "fakeProductId2",
+    _id: "fakeProductId2",
     name: "Long Sleeve Jacket",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum maxime soluta ipsa debitis necessitatibus odit quis provident iste, consectetur ut consequuntur? In iure excepturi, voluptate dicta minus voluptas autem aperiam?",

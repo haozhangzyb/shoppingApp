@@ -34,7 +34,7 @@ const ProductList = () => {
 
     return sortedProducts.map((productObj) => {
       return (
-        <Grid item xs={12} sm={6} md={4} lg={2.4} key={productObj.id}>
+        <Grid item xs={12} sm={6} md={4} lg={2.4} key={productObj._id}>
           <ProductCard productObj={productObj} />
         </Grid>
       );
