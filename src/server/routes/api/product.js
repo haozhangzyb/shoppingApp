@@ -23,6 +23,13 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res
+        .status(404)
+        .json({ errors: [{ msg: "Product not found" }] });
+    }
+
     return res.json(product);
   } catch (error) {
     console.error(error);
@@ -90,18 +97,19 @@ router.put("/:id", jwtTokenToUserId, async (req, res) => {
         .json({ errors: [{ msg: "Product not found" }] });
     }
 
-    product = new Product({
-      ...product,
-      name,
-      description,
-      category,
-      price,
-      quantity,
-      image_url,
-      updatedAt: Date.now(),
-    });
-
-    product = await product.save();
+    product = await Product.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        name,
+        description,
+        category,
+        price,
+        quantity,
+        image_url,
+        updatedAt: Date.now(),
+      },
+      { new: true, setDefaultsOnInsert: true }
+    );
 
     return res.json(product);
   } catch (error) {
