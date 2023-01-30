@@ -9,5 +9,13 @@ export const LOGOUT = "LOGOUT";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 export const SET_MODAL_CONTENT = "SET_MODAL_CONTENT";
-export const LOADING_END = "LOADING_END";
+export const AUTH_LOADING_END = "AUTH_LOADING_END";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+export const GET_PRODUCT_LIST = "GET_PRODUCT_LIST";
+export const GET_PRODUCT = "GET_PRODUCT";
+export const ADD_PRODUCT = "ADD_PRODUCT";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+export const PRODUCT_ERROR = "PRODUCT_ERROR";
+export const PRODUCT_LOADING_END = "PRODUCT_LOADING_END";
