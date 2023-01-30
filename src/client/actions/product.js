@@ -7,10 +7,14 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   PRODUCT_ERROR,
+  PRODUCT_LOADING_START,
 } from "./types";
 
 export const getProductList = () => async (dispatch) => {
   try {
+    dispatch({
+      type: PRODUCT_LOADING_START,
+    });
     const res = await axios.get("/api/products");
 
     dispatch({
@@ -28,6 +32,10 @@ export const getProductList = () => async (dispatch) => {
 
 export const getProduct = (id) => async (dispatch) => {
   try {
+    dispatch({
+      type: PRODUCT_LOADING_START,
+    });
+
     const res = await axios.get(`/api/products/${id}`);
 
     dispatch({

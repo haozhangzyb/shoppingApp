@@ -5,6 +5,7 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   PRODUCT_ERROR,
+  PRODUCT_LOADING_START,
 } from "../actions/types";
 
 const initialState = {
@@ -59,6 +60,11 @@ const productReducer = (state = initialState, action) => {
         ...state,
         error: payload,
         isLoading: false,
+      };
+    case PRODUCT_LOADING_START:
+      return {
+        ...state,
+        isLoading: true,
       };
     default:
       return state;
