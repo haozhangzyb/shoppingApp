@@ -77,7 +77,10 @@ const ProductDetail = () => {
             {productObj.description}
           </Typography>
           <Stack direction={"row"} spacing={2}>
-            <AddToCartButton sx={{ maxWidth: 100 }} inCartNumber={1} />
+            <AddToCartButton
+              sx={{ maxWidth: 100 }}
+              productObj={productObj}
+            />
             <Button
               variant='outlined'
               size='small'

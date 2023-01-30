@@ -41,7 +41,7 @@ const ProductCard = ({ productObj }) => {
       <CardActions
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
-        <AddToCartButton inCartNumber={1} />
+        <AddToCartButton productObj={productObj} />
         <Button
           variant='contained'
           sx={{ bgcolor: "#4f48dd", width: "48%" }}

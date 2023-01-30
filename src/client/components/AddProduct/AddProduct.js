@@ -294,7 +294,6 @@ const AddProduct = ({ isEditingProduct }) => {
                     height: 40,
                     textTransform: "none",
                   }}
-                  // onClick={formikFormData.handleSubmit}
                   onClick={() => {
                     dispatch(deleteProduct(productObj._id));
                     navigate("/");

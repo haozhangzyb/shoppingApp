@@ -7,6 +7,7 @@ import {
   Stack,
   useMediaQuery,
   Skeleton,
+  Badge,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
@@ -14,10 +15,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { logout as logoutAction } from "../../actions/auth";
 import { openModal } from "../../actions/authModal";
-import { useNavigate } from "react-router-dom";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -67,6 +68,8 @@ const Header = () => {
   const navigate = useNavigate();
   const authState = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cartReducer);
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -135,11 +138,25 @@ const Header = () => {
               <AuthButton />
 
               <Button
-                startDecorator={<ShoppingCartIcon />}
+                startDecorator={
+                  <Badge
+                    badgeContent={cart.totalQuantity}
+                    showZero
+                    sx={{
+                      "& .MuiBadge-badge": {
+                        // color: "lightgreen",
+                        backgroundColor: "red",
+                      },
+                    }}
+                  >
+                    <ShoppingCartIcon />
+                  </Badge>
+                }
                 sx={{ paddingRight: "0 !important" }}
               >
-                $0.00
+                ${cart.totalPrice}
               </Button>
+              {/* </Badge> */}
             </Stack>
           </Box>
         </Toolbar>

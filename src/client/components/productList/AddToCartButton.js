@@ -3,7 +3,29 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
-const AddToCartButton = ({ sx, inCartNumber }) => {
+import { useSelector, useDispatch } from "react-redux";
+
+import { addToCart, removeFromCart } from "../../actions/cart";
+
+const AddToCartButton = ({ sx, productObj }) => {
+  const cartState = useSelector((state) => state.cartReducer);
+  const itemInCart = cartState.cart.find(
+    (item) => item._id == productObj._id
+  );
+  const inCartQuantity = itemInCart ? itemInCart.inCartQuantity : 0;
+
+  const dispatch = useDispatch();
+
+  const removeItemHandler = () => {
+    if (inCartQuantity >= 1) {
+      dispatch(removeFromCart(productObj));
+    }
+  };
+
+  const addItemHandler = () => {
+    dispatch(addToCart(productObj));
+  };
+
   return (
     <ButtonGroup
       variant='contained'
@@ -23,6 +45,7 @@ const AddToCartButton = ({ sx, inCartNumber }) => {
           bgcolor: "#4f48dd",
           borderStyle: "none !important",
         }}
+        onClick={removeItemHandler}
       >
         -
       </Button>
@@ -31,12 +54,13 @@ const AddToCartButton = ({ sx, inCartNumber }) => {
           my: "auto",
         }}
       >
-        {inCartNumber}
+        {inCartQuantity}
       </Typography>
       <Button
         sx={{
           bgcolor: "#4f48dd",
         }}
+        onClick={addItemHandler}
       >
         +
       </Button>
