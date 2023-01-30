@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import {
   Button,
   CardMedia,
@@ -14,11 +14,19 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
 
+import { useNavigate, useParams } from "react-router-dom";
 import { addProductFormFields } from "../../Constants";
 import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 import { productObjPlaceholders } from "../../Constants";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  getProduct,
+  getProductList,
+  updateProduct,
+  addProduct,
+  deleteProduct,
+} from "../../actions/product";
 
 const AddProduct = ({ isEditingProduct }) => {
   const navigate = useNavigate();
@@ -27,10 +35,29 @@ const AddProduct = ({ isEditingProduct }) => {
   let onSubmit;
 
   const { id } = useParams();
-  if (isEditingProduct) {
-    const productObj = productObjPlaceholders.find(
-      (obj) => obj._id === id
-    );
+
+  const dispatch = useDispatch();
+  // const productObj = useSelector((state) => state.productReducer.product);
+  // const productObjJson = JSON.stringify(productObj);
+  const productListObj = useSelector(
+    (state) => state.productReducer.productList
+  );
+  const productListObjJson = JSON.stringify(productListObj);
+  const isLoading = useSelector((state) => state.productReducer.isLoading);
+  useEffect(() => {
+    if (isEditingProduct) {
+      // dispatch(getProduct(id));
+      dispatch(getProductList());
+    }
+  }, [productListObjJson, dispatch]);
+
+  const productObj = productListObj.find((obj) => obj._id === id);
+
+  const newProductObj = useSelector(
+    (state) => state.productReducer.product
+  );
+
+  if (isEditingProduct && !isLoading) {
     initialValues = {
       name: productObj.name,
       description: productObj.description,
@@ -41,7 +68,9 @@ const AddProduct = ({ isEditingProduct }) => {
     };
 
     onSubmit = (values) => {
-      console.log(values);
+      // console.log(values);
+      dispatch(updateProduct(id, values));
+      navigate(`/product/${id}`);
     };
   } else {
     initialValues = {
@@ -52,8 +81,12 @@ const AddProduct = ({ isEditingProduct }) => {
       quantity: 0,
       image_url: "",
     };
-    onSubmit = (values) => {
-      console.log(values);
+    onSubmit = async (values) => {
+      // console.log(values);
+      dispatch(addProduct(values));
+
+      // navigate(`/product/${newProductObj._id}`);
+      navigate("/");
     };
   }
 
@@ -67,6 +100,9 @@ const AddProduct = ({ isEditingProduct }) => {
       ? formikFormData.values.image_url
       : previewPlaceholder
   );
+
+  if (isEditingProduct && isLoading) return <div>Loading...</div>;
+
   return (
     <Grid2 container justifyContent={"center"}>
       <Grid2 xs={11} maxWidth={700}>
@@ -231,7 +267,9 @@ const AddProduct = ({ isEditingProduct }) => {
                 }}
                 onClick={formikFormData.handleSubmit}
               >
-                {addProductFormFields.ADD_PRODUCT}
+                {isEditingProduct
+                  ? addProductFormFields.UPDATE_PRODUCT
+                  : addProductFormFields.ADD_PRODUCT}
               </Button>
               <Button
                 variant='outlined'
@@ -257,6 +295,10 @@ const AddProduct = ({ isEditingProduct }) => {
                     textTransform: "none",
                   }}
                   // onClick={formikFormData.handleSubmit}
+                  onClick={() => {
+                    dispatch(deleteProduct(productObj._id));
+                    navigate("/");
+                  }}
                 >
                   {addProductFormFields.DELETE_PRODUCT}
                 </Button>

@@ -59,6 +59,8 @@ export const addProduct = (formData) => async (dispatch) => {
       type: ADD_PRODUCT,
       payload: res.data,
     });
+
+    dispatch(getProductList());
   } catch (err) {
     console.error(err.response.data.errors);
     dispatch({
@@ -76,6 +78,8 @@ export const deleteProduct = (id) => async (dispatch) => {
       type: DELETE_PRODUCT,
       payload: id,
     });
+
+    dispatch(getProductList());
   } catch (err) {
     console.error(err.response.data.errors);
     dispatch({
@@ -93,6 +97,7 @@ export const updateProduct = (id, formData) => async (dispatch) => {
       type: UPDATE_PRODUCT,
       payload: res.data,
     });
+    dispatch(getProductList());
   } catch (err) {
     console.error(err.response.data.errors);
     dispatch({

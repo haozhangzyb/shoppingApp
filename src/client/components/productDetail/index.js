@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -8,13 +9,15 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AddToCartButton from "../productList/AddToCartButton";
+import { useSelector, useDispatch } from "react-redux";
 
 import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 import { productObjPlaceholders } from "../../Constants";
 import ErrorPage from "../ErrorPage";
+import { getProduct, deleteProduct } from "../../actions/product";
+import { useEffect } from "react";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -23,8 +26,17 @@ const ProductDetail = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { id } = useParams();
-  const productObj = productObjPlaceholders.find((obj) => obj._id === id);
+  // const productObj = productObjPlaceholders.find((obj) => obj._id === id);
 
+  const dispatch = useDispatch();
+  const productObj = useSelector((state) => state.productReducer.product);
+  const productObjJson = JSON.stringify(productObj);
+  const isLoading = useSelector((state) => state.productReducer.isLoading);
+  useEffect(() => {
+    dispatch(getProduct(id));
+  }, [productObjJson, dispatch]);
+
+  if (isLoading) return <div>Loading...</div>;
   if (!productObj) return <ErrorPage />;
 
   return (
@@ -83,7 +95,10 @@ const ProductDetail = () => {
                 width: 100,
                 textTransform: "none",
               }}
-              // onClick={formikFormData.handleSubmit}
+              onClick={() => {
+                dispatch(deleteProduct(productObj._id));
+                navigate("/");
+              }}
             >
               Delete
             </Button>
