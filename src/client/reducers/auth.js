@@ -5,7 +5,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGOUT,
-  LOADING_END,
+  AUTH_LOADING_END,
   CLEAR_ERRORS,
 } from "../actions/types";
 import setAuthToken from "../utils/setAuthToken";
@@ -60,7 +60,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         errors: [],
       };
-    case LOADING_END:
+    case AUTH_LOADING_END:
       return {
         ...state,
         isLoading: false,

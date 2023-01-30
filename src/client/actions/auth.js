@@ -6,7 +6,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGOUT,
-  LOADING_END,
+  AUTH_LOADING_END,
   CLEAR_ERRORS,
 } from "../actions/types";
 
@@ -106,7 +106,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const loadingEnd = () => (dispatch) => {
-  dispatch({ type: LOADING_END });
+  dispatch({ type: AUTH_LOADING_END });
 };
 
 export const clearErrors = () => (dispatch) => {
