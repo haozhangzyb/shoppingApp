@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 
 import { addProductFormFields } from "../../Constants";
-import previewPlaceholder from "./image-preview-placeholder.jpg";
+import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 import { productObjPlaceholders } from "../../Constants";
 import { useNavigate, useParams } from "react-router-dom";
 

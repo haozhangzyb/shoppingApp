@@ -10,7 +10,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import { useNavigate } from "react-router-dom";
 
 import AddToCartButton from "./AddToCartButton";
-import previewPlaceholder from "./image-preview-placeholder.jpg";
+import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 
 const ProductCard = ({ productObj }) => {
   const navigate = useNavigate();

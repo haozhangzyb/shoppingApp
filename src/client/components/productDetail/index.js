@@ -12,7 +12,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AddToCartButton from "../productList/AddToCartButton";
 
-import previewPlaceholder from "../productList/image-preview-placeholder.jpg";
+import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 import { productObjPlaceholders } from "../../Constants";
 import ErrorPage from "../ErrorPage";
 
