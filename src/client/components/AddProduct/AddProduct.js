@@ -14,6 +14,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useFormik } from "formik";
+import * as yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useNavigate, useParams } from "react-router-dom";
@@ -90,8 +91,26 @@ const AddProduct = ({ isEditingProduct }) => {
     };
   }
 
+  const validationSchema = yup.object({
+    name: yup.string("enter a valid name").required("Required"),
+    description: yup
+      .string("enter a valid description")
+      .required("Required"),
+    category: yup.string("enter a valid category").required("Required"),
+    price: yup
+      .number("enter a valid price")
+      .min(1, "price cannot be negative or zero")
+      .required("Required"),
+    quantity: yup
+      .number("enter a valid quantity")
+      .min(1, "quantity cannot be negative or zero")
+      .required("Required"),
+    image_url: yup.string("enter a valid image url").required("Required"),
+  });
+
   const formikFormData = useFormik({
     initialValues,
+    validationSchema,
     onSubmit: (values) => onSubmit(values),
   });
 
@@ -126,6 +145,13 @@ const AddProduct = ({ isEditingProduct }) => {
                 onChange={formikFormData.handleChange}
                 onBlur={formikFormData.handleBlur}
                 value={formikFormData.values.name}
+                error={
+                  formikFormData.touched.name &&
+                  Boolean(formikFormData.errors.name)
+                }
+                helperText={
+                  formikFormData.touched.name && formikFormData.errors.name
+                }
               />
             </Grid2>
 
@@ -143,6 +169,14 @@ const AddProduct = ({ isEditingProduct }) => {
                 onChange={formikFormData.handleChange}
                 onBlur={formikFormData.handleBlur}
                 value={formikFormData.values.description}
+                error={
+                  formikFormData.touched.description &&
+                  Boolean(formikFormData.errors.description)
+                }
+                helperText={
+                  formikFormData.touched.description &&
+                  formikFormData.errors.description
+                }
               />
             </Grid2>
 
@@ -158,6 +192,10 @@ const AddProduct = ({ isEditingProduct }) => {
                   name='category'
                   value={formikFormData.values.category}
                   onChange={formikFormData.handleChange}
+                  error={
+                    formikFormData.touched.category &&
+                    Boolean(formikFormData.errors.category)
+                  }
                   sx={{
                     width: "100%",
                   }}
@@ -190,6 +228,14 @@ const AddProduct = ({ isEditingProduct }) => {
                 onChange={formikFormData.handleChange}
                 onBlur={formikFormData.handleBlur}
                 value={formikFormData.values.price}
+                error={
+                  formikFormData.touched.price &&
+                  Boolean(formikFormData.errors.price)
+                }
+                helperText={
+                  formikFormData.touched.price &&
+                  formikFormData.errors.price
+                }
               />
             </Grid2>
 
@@ -206,6 +252,14 @@ const AddProduct = ({ isEditingProduct }) => {
                 onChange={formikFormData.handleChange}
                 onBlur={formikFormData.handleBlur}
                 value={formikFormData.values.quantity}
+                error={
+                  formikFormData.touched.quantity &&
+                  Boolean(formikFormData.errors.quantity)
+                }
+                helperText={
+                  formikFormData.touched.quantity &&
+                  formikFormData.errors.quantity
+                }
               />
             </Grid2>
             <Grid2 item xs={12} sm={8}>
@@ -237,6 +291,10 @@ const AddProduct = ({ isEditingProduct }) => {
                 onChange={formikFormData.handleChange}
                 onBlur={formikFormData.handleBlur}
                 value={formikFormData.values.image_url}
+                error={
+                  formikFormData.touched.image_url &&
+                  Boolean(formikFormData.errors.image_url)
+                }
               />
             </Grid2>
             <Grid2 item xs={12} sm={9}>
