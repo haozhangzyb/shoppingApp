@@ -29,6 +29,9 @@ const ProductDetail = () => {
   // const productObj = productObjPlaceholders.find((obj) => obj._id === id);
 
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
   const productObj = useSelector((state) => state.productReducer.product);
   const productObjJson = JSON.stringify(productObj);
   const isLoading = useSelector((state) => state.productReducer.isLoading);
@@ -81,30 +84,35 @@ const ProductDetail = () => {
               sx={{ maxWidth: 100 }}
               productObj={productObj}
             />
-            <Button
-              variant='outlined'
-              size='small'
-              sx={{ textTransform: "none", width: 100 }}
-              onClick={() => navigate(`/editProduct/${productObj._id}`)}
-            >
-              Edit
-            </Button>
-            <Button
-              variant='contained'
-              sx={{
-                bgcolor: "#e15241",
-                color: "white",
-                height: 40,
-                width: 100,
-                textTransform: "none",
-              }}
-              onClick={() => {
-                dispatch(deleteProduct(productObj._id));
-                navigate("/");
-              }}
-            >
-              Delete
-            </Button>
+
+            {isAuthenticated && (
+              <Button
+                variant='outlined'
+                size='small'
+                sx={{ textTransform: "none", width: 100 }}
+                onClick={() => navigate(`/editProduct/${productObj._id}`)}
+              >
+                Edit
+              </Button>
+            )}
+            {isAuthenticated && (
+              <Button
+                variant='contained'
+                sx={{
+                  bgcolor: "#e15241",
+                  color: "white",
+                  height: 40,
+                  width: 100,
+                  textTransform: "none",
+                }}
+                onClick={() => {
+                  dispatch(deleteProduct(productObj._id));
+                  navigate("/");
+                }}
+              >
+                Delete
+              </Button>
+            )}
           </Stack>
         </Grid2>
       </Grid2>

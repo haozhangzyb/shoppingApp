@@ -8,12 +8,16 @@ import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/system";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import AddToCartButton from "./AddToCartButton";
 import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 
 const ProductCard = ({ productObj }) => {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   return (
     <Card
@@ -42,14 +46,16 @@ const ProductCard = ({ productObj }) => {
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
         <AddToCartButton productObj={productObj} />
-        <Button
-          variant='contained'
-          sx={{ bgcolor: "#4f48dd", width: "48%" }}
-          size='small'
-          onClick={() => navigate(`/editProduct/${productObj._id}`)}
-        >
-          Edit
-        </Button>
+        {isAuthenticated && (
+          <Button
+            variant='contained'
+            sx={{ bgcolor: "#4f48dd", width: "48%" }}
+            size='small'
+            onClick={() => navigate(`/editProduct/${productObj._id}`)}
+          >
+            Edit
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

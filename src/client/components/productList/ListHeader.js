@@ -8,10 +8,15 @@ import {
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box, Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { productListSortMenuItems } from "../../Constants";
 
 const ListHeader = (props) => {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
   return (
     <Grid2
       container
@@ -55,17 +60,19 @@ const ListHeader = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        <Button
-          variant='contained'
-          sx={{
-            bgcolor: "#4f48dd",
-            m: 1,
-            textTransform: "none",
-          }}
-          onClick={() => navigate("/addProduct")}
-        >
-          Add Product
-        </Button>
+        {isAuthenticated && (
+          <Button
+            variant='contained'
+            sx={{
+              bgcolor: "#4f48dd",
+              m: 1,
+              textTransform: "none",
+            }}
+            onClick={() => navigate("/addProduct")}
+          >
+            Add Product
+          </Button>
+        )}
       </Stack>
     </Grid2>
   );
