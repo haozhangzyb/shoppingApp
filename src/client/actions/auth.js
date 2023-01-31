@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   AUTH_LOADING_END,
-  CLEAR_ERRORS,
+  CLEAR_AUTH_ERRORS,
 } from "../actions/types";
 
 import setAuthToken from "../utils/setAuthToken";
@@ -110,7 +110,7 @@ export const loadingEnd = () => (dispatch) => {
 };
 
 export const clearErrors = () => (dispatch) => {
-  dispatch({ type: CLEAR_ERRORS });
+  dispatch({ type: CLEAR_AUTH_ERRORS });
 };
 
 export const forgotPassword = (email) => async (dispatch) => {

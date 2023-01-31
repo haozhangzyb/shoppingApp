@@ -1,8 +1,8 @@
 import { authModalContentConstants } from "../Constants";
 import {
-  OPEN_MODAL,
-  CLOSE_MODAL,
-  SET_MODAL_CONTENT,
+  OPEN_AUTH_MODAL,
+  CLOSE_AUTH_MODAL,
+  SET_AUTH_MODAL_CONTENT,
 } from "../actions/types";
 
 const initialState = {
@@ -14,18 +14,18 @@ const authModalReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case OPEN_MODAL:
+    case OPEN_AUTH_MODAL:
       return {
         ...state,
         isModalOpen: true,
       };
-    case CLOSE_MODAL:
+    case CLOSE_AUTH_MODAL:
       return {
         ...state,
         isModalOpen: false,
         modalContent: authModalContentConstants.LOG_IN,
       };
-    case SET_MODAL_CONTENT:
+    case SET_AUTH_MODAL_CONTENT:
       return {
         ...state,
         modalContent: payload,

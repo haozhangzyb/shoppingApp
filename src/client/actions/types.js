@@ -5,12 +5,12 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
-
-export const OPEN_MODAL = "OPEN_MODAL";
-export const CLOSE_MODAL = "CLOSE_MODAL";
-export const SET_MODAL_CONTENT = "SET_MODAL_CONTENT";
 export const AUTH_LOADING_END = "AUTH_LOADING_END";
-export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const CLEAR_AUTH_ERRORS = "CLEAR_AUTH_ERRORS";
+
+export const OPEN_AUTH_MODAL = "OPEN_AUTH_MODAL";
+export const CLOSE_AUTH_MODAL = "CLOSE_AUTH_MODAL";
+export const SET_AUTH_MODAL_CONTENT = "SET_AUTH_MODAL_CONTENT";
 
 export const GET_PRODUCT_LIST = "GET_PRODUCT_LIST";
 export const GET_PRODUCT = "GET_PRODUCT";

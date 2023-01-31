@@ -6,7 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   AUTH_LOADING_END,
-  CLEAR_ERRORS,
+  CLEAR_AUTH_ERRORS,
 } from "../actions/types";
 import setAuthToken from "../utils/setAuthToken";
 
@@ -55,7 +55,7 @@ const authReducer = (state = initialState, action) => {
         user: null,
         errors: payload,
       };
-    case CLEAR_ERRORS:
+    case CLEAR_AUTH_ERRORS:
       return {
         ...state,
         errors: [],
