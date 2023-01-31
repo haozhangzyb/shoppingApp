@@ -20,6 +20,7 @@ import ErrorPage from "./components/ErrorPage";
 import CartModal from "./components/cartModal";
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   useEffect(() => {
@@ -66,12 +67,24 @@ function App() {
                 path='/product/:id'
                 element={<ProductDetail />}
               />
-              <Route exact path='/addProduct' element={<AddProduct />} />
+
+              <Route
+                exact
+                path='/addProduct'
+                element={<PrivateRoute component={AddProduct} />}
+              />
               <Route
                 exact
                 path='/editProduct/:id'
-                element={<AddProduct isEditingProduct={true} />}
+                element={
+                  <PrivateRoute
+                    component={AddProduct}
+                    isEditingProduct={true}
+                  />
+                }
               />
+
+              <Route path='/error' element={<ErrorPage />} />
               <Route path='*' element={<ErrorPage />} />
             </Routes>
           </Box>
