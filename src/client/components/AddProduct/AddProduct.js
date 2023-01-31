@@ -71,7 +71,7 @@ const AddProduct = ({ isEditingProduct }) => {
     onSubmit = (values) => {
       // console.log(values);
       dispatch(updateProduct(id, values));
-      navigate(`/product/${id}`);
+      navigate(`/products/${id}`);
     };
   } else {
     initialValues = {
@@ -86,7 +86,7 @@ const AddProduct = ({ isEditingProduct }) => {
       // console.log(values);
       dispatch(addProduct(values));
 
-      // navigate(`/product/${newProductObj._id}`);
+      // navigate(`/products/${newProductObj._id}`);
       navigate("/");
     };
   }

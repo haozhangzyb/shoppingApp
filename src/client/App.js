@@ -64,7 +64,7 @@ function App() {
               <Route exact path='/' element={<ProductList />} />
               <Route
                 exact
-                path='/product/:id'
+                path='/products/:id'
                 element={<ProductDetail />}
               />
 

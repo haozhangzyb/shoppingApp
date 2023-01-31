@@ -32,9 +32,9 @@ const ProductCard = ({ productObj }) => {
         sx={{ height: 200, mx: 1, mt: 1, backgroundSize: "contain" }}
         // image='https://mui.com/static/images/cards/contemplative-reptile.jpg'
         image={productObj.image_url || previewPlaceholder}
-        onClick={() => navigate(`/product/${productObj._id}`)}
+        onClick={() => navigate(`/products/${productObj._id}`)}
       />
-      <CardContent onClick={() => navigate(`/product/${productObj._id}`)}>
+      <CardContent onClick={() => navigate(`/products/${productObj._id}`)}>
         <Typography variant='body' color='text.secondary'>
           {productObj.name}
         </Typography>

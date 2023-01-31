@@ -14,7 +14,7 @@ const CartProductCard = ({ productObj }) => {
   const navigate = useNavigate();
 
   const onClickToProductDetail = () => {
-    navigate(`/product/${productObj._id}`);
+    navigate(`/products/${productObj._id}`);
     dispatch(closeCartModal());
   };
   return (
