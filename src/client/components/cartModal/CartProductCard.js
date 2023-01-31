@@ -2,14 +2,21 @@ import React from "react";
 import { Box, CardMedia, Link, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
 import AddToCartButton from "../productList/AddToCartButton";
 import { removeAllFromCart } from "../../actions/cart";
+import { closeCartModal } from "../../actions/cartModal";
 
 const CartProductCard = ({ productObj }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const onClickToProductDetail = () => {
+    navigate(`/product/${productObj._id}`);
+    dispatch(closeCartModal());
+  };
   return (
     <Box sx={{ display: "flex", my: 2 }}>
       <CardMedia
@@ -20,6 +27,7 @@ const CartProductCard = ({ productObj }) => {
           border: "1px dashed #c4c4c4",
         }}
         image={productObj.image_url || previewPlaceholder}
+        onClick={onClickToProductDetail}
       />
 
       <Box
@@ -37,6 +45,7 @@ const CartProductCard = ({ productObj }) => {
             justifyContent: "space-between",
             alignContent: "center",
           }}
+          onClick={onClickToProductDetail}
         >
           <Typography variant='h7'> {productObj.name} </Typography>
           <Typography variant='h7' color='#4f48dd'>
