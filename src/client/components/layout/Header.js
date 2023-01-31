@@ -128,7 +128,7 @@ const Header = () => {
                 <Typography variant='h5'>Management</Typography>
               )}
               <Typography variant='subtitle1' sx={{ fontSize: "10px" }}>
-                Chuwa
+                Shopping
               </Typography>
             </Stack>
             {!isSmallScreen && <SearchBox isSmallScreen={isSmallScreen} />}
