@@ -31,7 +31,9 @@ const cartReducer = (state = initialState, action) => {
                 : item
             )
           : [...state.cart, { ...payload, inCartQuantity: 1 }],
-        totalPrice: state.totalPrice + payload.price,
+        totalPrice: Number(
+          Number(state.totalPrice + payload.price).toFixed(2)
+        ),
         totalQuantity: state.totalQuantity + 1,
         isLoading: false,
       };
@@ -46,7 +48,9 @@ const cartReducer = (state = initialState, action) => {
               }
             : item
         ),
-        totalPrice: state.totalPrice - payload.price,
+        totalPrice: Number(
+          Number(state.totalPrice - payload.price).toFixed(2)
+        ),
         totalQuantity: state.totalQuantity - 1,
         isLoading: false,
       };
