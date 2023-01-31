@@ -9,7 +9,7 @@ import { addToCart, removeOneFromCart } from "../../actions/cart";
 
 const AddToCartButton = ({ sx, productObj }) => {
   const cartState = useSelector((state) => state.cartReducer);
-  const itemInCart = cartState.cart.find(
+  const itemInCart = cartState.products.find(
     (item) => item._id == productObj._id
   );
   const inCartQuantity = itemInCart ? itemInCart.inCartQuantity : 0;

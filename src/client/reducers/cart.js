@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  cart: [],
+  products: [],
   isLoading: true,
   error: {},
   totalQuantity: 0,
@@ -26,7 +26,7 @@ const cartReducer = (state = initialState, action) => {
     case GET_CART:
       return {
         ...state,
-        cart: payload,
+        products: payload,
         isLoading: false,
       };
     case ADD_TO_CART:
@@ -34,8 +34,8 @@ const cartReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        cart: state.cart.find((item) => item._id === payload._id)
-          ? state.cart.map((item) =>
+        products: state.products.find((item) => item._id === payload._id)
+          ? state.products.map((item) =>
               item._id === payload._id
                 ? {
                     ...item,
@@ -43,7 +43,7 @@ const cartReducer = (state = initialState, action) => {
                   }
                 : item
             )
-          : [...state.cart, { ...payload, inCartQuantity: 1 }],
+          : [...state.products, { ...payload, inCartQuantity: 1 }],
         totalQuantity: state.totalQuantity + 1,
         isLoading: false,
         subtotal: newSubtotal,
@@ -55,7 +55,7 @@ const cartReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        cart: state.cart.map((item) =>
+        products: state.products.map((item) =>
           item._id === payload._id
             ? {
                 ...item,
@@ -72,7 +72,9 @@ const cartReducer = (state = initialState, action) => {
     case REMOVE_ALL_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter((item) => item._id !== payload._id),
+        products: state.products.filter(
+          (item) => item._id !== payload._id
+        ),
         subtotal: Number(
           Number(
             state.subtotal - payload.price * payload.inCartQuantity

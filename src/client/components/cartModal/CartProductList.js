@@ -4,8 +4,8 @@ import { Typography } from "@mui/material";
 import CartProductCard from "./CartProductCard";
 
 const CartProductList = ({ cartState }) =>
-  cartState.cart.length > 0 ? (
-    cartState.cart.map((item) => {
+  cartState.products.length > 0 ? (
+    cartState.products.map((item) => {
       if (item.inCartQuantity > 0)
         return <CartProductCard key={item._id} productObj={item} />;
     })
