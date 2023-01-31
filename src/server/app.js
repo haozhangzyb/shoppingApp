@@ -4,6 +4,7 @@ import connectDB from "./config/connectDB.js";
 import usersRoute from "./routes/api/users.js";
 import authRoute from "./routes/api/auth.js";
 import productRoute from "./routes/api/product.js";
+import cartRoute from "./routes/api/cart.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => res.send("Project2 API Running"));
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
+app.use("/api/cart", cartRoute);
 
 const PORT = process.env.PORT || 5001;
 
