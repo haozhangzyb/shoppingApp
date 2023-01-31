@@ -99,11 +99,11 @@ const AddProduct = ({ isEditingProduct }) => {
     category: yup.string("enter a valid category").required("Required"),
     price: yup
       .number("enter a valid price")
-      .min(1, "price cannot be negative or zero")
+      .positive("price cannot be negative or zero")
       .required("Required"),
     quantity: yup
       .number("enter a valid quantity")
-      .min(1, "quantity cannot be negative or zero")
+      .positive("price cannot be negative or zero")
       .required("Required"),
     image_url: yup.string("enter a valid image url").required("Required"),
   });
