@@ -9,7 +9,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
 import { ResetEmailSent } from "./ResetEmailSent";
-import { closeModal } from "../../actions/authModal";
+import { closeAuthModal } from "../../actions/authModal";
 
 const AuthModal = () => {
   const { isModalOpen, modalContent } = useSelector(
@@ -19,7 +19,7 @@ const AuthModal = () => {
   // const authState = useSelector((state) => state.authReducer);
 
   const handleModalClose = () => {
-    closeModal()(dispatch);
+    closeAuthModal()(dispatch);
   };
 
   // if (authState.isAuthenticated) {

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
-import { setModalContent } from "../../actions/authModal";
+import { setAuthModalContent } from "../../actions/authModal";
 import { forgotPassword } from "../../actions/auth";
 
 const ForgotPassword = ({ validationSchema }) => {
@@ -20,7 +20,7 @@ const ForgotPassword = ({ validationSchema }) => {
     onSubmit: (values) => {
       // console.log(values);
       forgotPassword(values)(dispatch);
-      // setModalContent(authModalContentConstants.RESET_EMAIL_SENT)(
+      // setAuthModalContent(authModalContentConstants.RESET_EMAIL_SENT)(
       //   dispatch
       // );
     },
@@ -72,7 +72,9 @@ const ForgotPassword = ({ validationSchema }) => {
           variant='body2'
           underline='none'
           onClick={() =>
-            setModalContent(authModalContentConstants.SIGN_UP)(dispatch)
+            setAuthModalContent(authModalContentConstants.SIGN_UP)(
+              dispatch
+            )
           }
         >
           {"Sign Up"}

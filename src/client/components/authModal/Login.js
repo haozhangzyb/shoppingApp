@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 import { login as loginAction } from "../../actions/auth";
-import { setModalContent } from "../../actions/authModal";
+import { setAuthModalContent } from "../../actions/authModal";
 
 const Login = ({ validationSchema }) => {
   const dispatch = useDispatch();
@@ -84,7 +84,9 @@ const Login = ({ validationSchema }) => {
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.SIGN_UP)(dispatch)
+              setAuthModalContent(authModalContentConstants.SIGN_UP)(
+                dispatch
+              )
             }
           >
             {"Sign Up"}
@@ -105,9 +107,9 @@ const Login = ({ validationSchema }) => {
             variant='body2'
             underline='none'
             onClick={() =>
-              setModalContent(authModalContentConstants.FORGOT_PASSWORD)(
-                dispatch
-              )
+              setAuthModalContent(
+                authModalContentConstants.FORGOT_PASSWORD
+              )(dispatch)
             }
           >
             Forgot password?

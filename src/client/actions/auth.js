@@ -11,8 +11,8 @@ import {
 } from "../actions/types";
 
 import setAuthToken from "../utils/setAuthToken";
-import { closeModal } from "./authModal";
-import { setModalContent } from "./authModal";
+import { closeAuthModal } from "./authModal";
+import { setAuthModalContent } from "./authModal";
 import { authModalContentConstants } from "../Constants";
 
 export const loadUser = () => async (dispatch) => {
@@ -54,7 +54,7 @@ export const register =
       });
 
       dispatch(loadUser());
-      dispatch(closeModal());
+      dispatch(closeAuthModal());
     } catch (err) {
       console.error(err.response.data.errors);
       dispatch({
@@ -86,7 +86,7 @@ export const login =
       });
 
       dispatch(loadUser());
-      dispatch(closeModal());
+      dispatch(closeAuthModal());
     } catch (err) {
       console.error(err);
       console.error(err.response.data.errors);
@@ -118,7 +118,9 @@ export const forgotPassword = (email) => async (dispatch) => {
     const res = await axios.post(`/api/auth/forgot-password/${email}`);
 
     console.log(res.data);
-    dispatch(setModalContent(authModalContentConstants.RESET_EMAIL_SENT));
+    dispatch(
+      setAuthModalContent(authModalContentConstants.RESET_EMAIL_SENT)
+    );
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,

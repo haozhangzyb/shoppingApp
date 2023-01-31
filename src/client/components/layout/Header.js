@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { logout as logoutAction } from "../../actions/auth";
-import { openModal } from "../../actions/authModal";
+import { openAuthModal } from "../../actions/authModal";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -92,7 +92,7 @@ const Header = () => {
     return (
       <Button
         startDecorator={<PersonIcon />}
-        onClick={() => openModal()(dispatch)}
+        onClick={() => openAuthModal()(dispatch)}
       >
         Log in
       </Button>
@@ -138,6 +138,9 @@ const Header = () => {
               <AuthButton />
 
               <Button
+                sx={{ paddingRight: "0 !important" }}
+                // onClick={() => {}}
+
                 startDecorator={
                   <Badge
                     badgeContent={cart.totalQuantity}
@@ -152,7 +155,6 @@ const Header = () => {
                     <ShoppingCartIcon />
                   </Badge>
                 }
-                sx={{ paddingRight: "0 !important" }}
               >
                 ${cart.totalPrice}
               </Button>
