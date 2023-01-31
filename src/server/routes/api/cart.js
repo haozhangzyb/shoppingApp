@@ -15,6 +15,8 @@ const findCart = async (userId) => {
   return cart;
 };
 
+const numberfy = (num) => Number(Number(num).toFixed(2));
+
 // @route   GET api/cart
 // @desc    Get cart
 // @access  Private
@@ -38,8 +40,6 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
     if (!product)
       return res.status(400).json({ msg: "Product not found" });
 
-    // console.log(cart.products[0]._id.toString(), product._id);
-    // console.log(cart.products.map((p) => p._id === product._id));
     if (
       cart.products.some(
         (p) => p._id.toString() === product._id.toString()
@@ -59,9 +59,9 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
     }
 
     cart.totalQuantity += 1;
-    cart.subtotal += product.price;
-    cart.tax = cart.subtotal * 0.1;
-    cart.total = cart.subtotal + cart.tax - cart.discount;
+    cart.subtotal = numberfy(cart.subtotal + product.price);
+    cart.tax = numberfy(cart.subtotal * 0.1);
+    cart.total = numberfy(cart.subtotal + cart.tax - cart.discount);
 
     cart = await cart.save();
     return res.status(200).json(cart);
@@ -97,9 +97,11 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
     );
 
     cart.totalQuantity -= product.inCartQuantity;
-    cart.subtotal -= product.price * product.inCartQuantity;
-    cart.tax = cart.subtotal * 0.1;
-    cart.total = cart.subtotal + cart.tax - cart.discount;
+    cart.subtotal = numberfy(
+      cart.subtotal - product.price * product.inCartQuantity
+    );
+    cart.tax = numberfy(cart.subtotal * 0.1);
+    cart.total = numberfy(cart.subtotal + cart.tax - cart.discount);
 
     cart = await cart.save();
     return res.status(200).json(cart);
@@ -144,9 +146,9 @@ router.put("/", jwtTokenToUserId, async (req, res) => {
     }
 
     cart.totalQuantity -= 1;
-    cart.subtotal -= product.price;
-    cart.tax = cart.subtotal * 0.1;
-    cart.total = cart.subtotal + cart.tax - cart.discount;
+    cart.subtotal = numberfy(cart.subtotal - product.price);
+    cart.tax = numberfy(cart.subtotal * 0.1);
+    cart.total = numberfy(cart.subtotal + cart.tax - cart.discount);
 
     cart = await cart.save();
     return res.status(200).json(cart);
