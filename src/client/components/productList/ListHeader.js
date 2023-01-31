@@ -5,6 +5,7 @@ import {
   Select,
   Button,
 } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box, Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { productListSortMenuItems } from "../../Constants";
@@ -12,7 +13,8 @@ import { productListSortMenuItems } from "../../Constants";
 const ListHeader = (props) => {
   const navigate = useNavigate();
   return (
-    <Box
+    <Grid2
+      container
       sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -65,7 +67,7 @@ const ListHeader = (props) => {
           Add Product
         </Button>
       </Stack>
-    </Box>
+    </Grid2>
   );
 };
 export default ListHeader;
