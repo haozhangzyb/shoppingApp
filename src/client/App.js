@@ -17,6 +17,9 @@ import ProductList from "./components/productList";
 import AddProduct from "./components/AddProduct/AddProduct";
 import ProductDetail from "./components/productDetail";
 import ErrorPage from "./components/ErrorPage";
+import CartModal from "./components/cartModal";
+import { ThemeProvider } from "@mui/material";
+import theme from "./theme";
 
 function App() {
   useEffect(() => {
@@ -39,6 +42,7 @@ function App() {
   }, []);
 
   return (
+    // <ThemeProvider theme={theme}>
     <Provider store={store}>
       <BrowserRouter>
         <Box
@@ -52,6 +56,7 @@ function App() {
         >
           <Header />
           <AuthModal />
+          <CartModal />
 
           <Box my={3}>
             <Routes>
@@ -75,6 +80,7 @@ function App() {
         </Box>
       </BrowserRouter>
     </Provider>
+    // </ThemeProvider>
   );
 }
 

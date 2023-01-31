@@ -5,7 +5,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { addToCart, removeFromCart } from "../../actions/cart";
+import { addToCart, removeOneFromCart } from "../../actions/cart";
 
 const AddToCartButton = ({ sx, productObj }) => {
   const cartState = useSelector((state) => state.cartReducer);
@@ -18,7 +18,7 @@ const AddToCartButton = ({ sx, productObj }) => {
 
   const removeItemHandler = () => {
     if (inCartQuantity >= 1) {
-      dispatch(removeFromCart(productObj));
+      dispatch(removeOneFromCart(productObj));
     }
   };
 
@@ -52,6 +52,7 @@ const AddToCartButton = ({ sx, productObj }) => {
       <Typography
         sx={{
           my: "auto",
+          fontSize: 12,
         }}
       >
         {inCartQuantity}

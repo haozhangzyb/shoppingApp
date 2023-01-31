@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 
 import { logout as logoutAction } from "../../actions/auth";
 import { openAuthModal } from "../../actions/authModal";
+import { openCartModal } from "../../actions/cartModal";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -139,8 +140,9 @@ const Header = () => {
 
               <Button
                 sx={{ paddingRight: "0 !important" }}
-                // onClick={() => {}}
-
+                onClick={() => {
+                  dispatch(openCartModal());
+                }}
                 startDecorator={
                   <Badge
                     badgeContent={cart.totalQuantity}
@@ -156,7 +158,7 @@ const Header = () => {
                   </Badge>
                 }
               >
-                ${cart.totalPrice}
+                ${cart.subtotal}
               </Button>
               {/* </Badge> */}
             </Stack>
