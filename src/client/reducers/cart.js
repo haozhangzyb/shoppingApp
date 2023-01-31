@@ -24,64 +24,13 @@ const cartReducer = (state = initialState, action) => {
 
   switch (type) {
     case GET_CART:
-      return {
-        ...state,
-        products: payload,
-        isLoading: false,
-      };
     case ADD_TO_CART:
-      newSubtotal = numberfy(state.subtotal + payload.price);
-
-      return {
-        ...state,
-        products: state.products.find((item) => item._id === payload._id)
-          ? state.products.map((item) =>
-              item._id === payload._id
-                ? {
-                    ...item,
-                    inCartQuantity: (item.inCartQuantity || 0) + 1,
-                  }
-                : item
-            )
-          : [...state.products, { ...payload, inCartQuantity: 1 }],
-        totalQuantity: state.totalQuantity + 1,
-        isLoading: false,
-        subtotal: newSubtotal,
-        tax: numberfy(newSubtotal * 0.1),
-        total: numberfy(newSubtotal * 1.1),
-      };
     case REMOVE_ONE_FROM_CART:
-      newSubtotal = numberfy(state.subtotal - payload.price);
-
-      return {
-        ...state,
-        products: state.products.map((item) =>
-          item._id === payload._id
-            ? {
-                ...item,
-                inCartQuantity: (item.inCartQuantity || 0) - 1,
-              }
-            : item
-        ),
-        totalQuantity: state.totalQuantity - 1,
-        isLoading: false,
-        subtotal: newSubtotal,
-        tax: numberfy(newSubtotal * 0.1),
-        total: numberfy(newSubtotal * 1.1),
-      };
     case REMOVE_ALL_FROM_CART:
       return {
         ...state,
-        products: state.products.filter(
-          (item) => item._id !== payload._id
-        ),
-        subtotal: Number(
-          Number(
-            state.subtotal - payload.price * payload.inCartQuantity
-          ).toFixed(2)
-        ),
-        totalQuantity: state.totalQuantity - payload.inCartQuantity,
         isLoading: false,
+        ...payload,
       };
     default:
       return state;

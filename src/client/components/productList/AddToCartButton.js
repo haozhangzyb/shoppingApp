@@ -14,7 +14,7 @@ import {
 const AddToCartButton = ({ sx, productObj }) => {
   const cartState = useSelector((state) => state.cartReducer);
   const itemInCart = cartState.products.find(
-    (item) => item._id == productObj._id
+    (item) => item._id === productObj._id
   );
   const inCartQuantity = itemInCart ? itemInCart.inCartQuantity : 0;
 
@@ -22,14 +22,14 @@ const AddToCartButton = ({ sx, productObj }) => {
 
   const removeItemHandler = () => {
     if (inCartQuantity > 1) {
-      dispatch(removeOneFromCart(productObj));
+      dispatch(removeOneFromCart(productObj._id));
     } else if (inCartQuantity === 1) {
-      dispatch(removeAllFromCart(productObj));
+      dispatch(removeAllFromCart(productObj._id));
     }
   };
 
   const addItemHandler = () => {
-    dispatch(addToCart(productObj));
+    dispatch(addToCart(productObj._id));
   };
 
   return (

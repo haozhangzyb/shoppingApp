@@ -68,7 +68,7 @@ const CartProductCard = ({ productObj }) => {
             variant='h7'
             color='#6c727f'
             sx={{ textDecoration: "underline", my: "auto" }}
-            onClick={() => dispatch(removeAllFromCart(productObj))}
+            onClick={() => dispatch(removeAllFromCart(productObj._id))}
           >
             Remove
           </Typography>

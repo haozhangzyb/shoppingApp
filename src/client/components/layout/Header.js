@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { logout as logoutAction } from "../../actions/auth";
 import { openAuthModal } from "../../actions/authModal";
 import { openCartModal } from "../../actions/cartModal";
+import { useEffect } from "react";
+import { getCart } from "../../actions/cart";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -70,7 +72,12 @@ const Header = () => {
   const authState = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cartReducer);
+  const cartState = useSelector((state) => state.cartReducer);
+  const cartStateJson = JSON.stringify(cartState);
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, [cartStateJson, dispatch]);
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -146,7 +153,7 @@ const Header = () => {
                 }}
                 startDecorator={
                   <Badge
-                    badgeContent={cart.totalQuantity}
+                    badgeContent={cartState.totalQuantity}
                     showZero
                     sx={{
                       "& .MuiBadge-badge": {
@@ -159,7 +166,7 @@ const Header = () => {
                   </Badge>
                 }
               >
-                ${cart.subtotal}
+                ${cartState.total}
               </Button>
               {/* </Badge> */}
             </Stack>

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Modal, Container, Typography, Box, Divider } from "@mui/material";
@@ -8,14 +8,19 @@ import CartModalHeader from "./CartModalHeader";
 import DiscountArea from "./DiscountArea";
 import CartProductList from "./CartProductList";
 import TotalPriceArea from "./TotalPriceArea";
+import { getCart } from "../../actions/cart";
 
 const CartModal = () => {
   const isCartModalOpen = useSelector(
     (state) => state.cartModalReducer.isCartModalOpen
   );
-  const cartState = useSelector((state) => state.cartReducer);
 
+  const cartState = useSelector((state) => state.cartReducer);
+  const cartStateJson = JSON.stringify(cartState);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCart());
+  }, [cartStateJson, dispatch]);
 
   const handleCartModalClose = () => {
     closeCartModal()(dispatch);
