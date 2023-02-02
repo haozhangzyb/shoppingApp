@@ -40,8 +40,8 @@ const CartModal = () => {
         justifyContent: "center",
         alignItems: "center",
         maxWidth: "100vw",
-        maxHeight: "100vh",
-        overflow: "auto",
+        // maxHeight: "100vh",
+        // overflow: "scroll",
       }}
     >
       <Container
@@ -52,6 +52,9 @@ const CartModal = () => {
           //   boxShadow: 24,
           //   p: 0,
           //   m: 0,
+          maxHeight: "100vh",
+          overflow: "scroll",
+          py: 1,
         }}
       >
         <CartModalHeader
