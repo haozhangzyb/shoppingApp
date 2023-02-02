@@ -74,9 +74,13 @@ const Header = () => {
 
   const cartState = useSelector((state) => state.cartReducer);
   const cartStateJson = JSON.stringify(cartState);
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   useEffect(() => {
-    dispatch(getCart());
+    if (isAuthenticated) dispatch(getCart());
+    // dispatch(getCart());
   }, [cartStateJson, dispatch]);
 
   const theme = useTheme();

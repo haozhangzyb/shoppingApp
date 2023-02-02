@@ -14,6 +14,7 @@ import setAuthToken from "../utils/setAuthToken";
 import { closeAuthModal } from "./authModal";
 import { setAuthModalContent } from "./authModal";
 import { authModalContentConstants } from "../Constants";
+import { getCart } from "./cart";
 
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -28,6 +29,8 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
+
+    dispatch(getCart());
   } catch (err) {
     console.error(err.response.data.errors);
     dispatch({

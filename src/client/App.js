@@ -21,6 +21,7 @@ import CartModal from "./components/cartModal";
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
 import PrivateRoute from "./components/PrivateRoute";
+import { getCart } from "./actions/cart";
 
 function App() {
   useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
       // try to fetch a user, if no token or invalid token we
       // will get a 401 response from our API
       store.dispatch(loadUser());
+      store.dispatch(getCart());
     } else {
       store.dispatch(loadingEnd());
     }
