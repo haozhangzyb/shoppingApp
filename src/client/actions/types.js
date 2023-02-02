@@ -32,3 +32,6 @@ export const CLEAR_LOCAL_CART = "CLEAR_LOCAL_CART";
 
 export const OPEN_CART_MODAL = "OPEN_CART_MODAL";
 export const CLOSE_CART_MODAL = "CLOSE_CART_MODAL";
+
+export const ADD_ALERT = "ADD_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";

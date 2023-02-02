@@ -2,25 +2,25 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 import { Box } from "@mui/system";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
 
 import "./App.css";
+import theme from "./theme";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Body from "./components/layout/Body";
 import AuthModal from "./components/authModal";
-
-import store from "./store";
-import setAuthToken from "./utils/setAuthToken";
-import { loadUser, logout, loadingEnd } from "./actions/auth";
+import PrivateRoute from "./components/PrivateRoute";
 import ProductList from "./components/productList";
 import AddProduct from "./components/AddProduct/AddProduct";
 import ProductDetail from "./components/productDetail";
 import ErrorPage from "./components/ErrorPage";
 import CartModal from "./components/cartModal";
-import { ThemeProvider } from "@mui/material";
-import theme from "./theme";
-import PrivateRoute from "./components/PrivateRoute";
+
+import store from "./store";
+import setAuthToken from "./utils/setAuthToken";
+import { loadUser, logout, loadingEnd } from "./actions/auth";
 import { getCart } from "./actions/cart";
 
 function App() {

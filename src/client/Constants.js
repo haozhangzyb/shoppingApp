@@ -57,3 +57,11 @@ export const productObjPlaceholders = [
     updatedAt: "1674993842984",
   },
 ];
+
+export const AlertTypes = {
+  SUCCESS: "success",
+  ERROR: "error",
+  INFO: "info",
+  WARNING: "warning",
+  INFO: "info",
+};
