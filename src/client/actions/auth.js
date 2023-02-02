@@ -14,7 +14,7 @@ import setAuthToken from "../utils/setAuthToken";
 import { closeAuthModal } from "./authModal";
 import { setAuthModalContent } from "./authModal";
 import { authModalContentConstants } from "../Constants";
-import { getCart } from "./cart";
+import { getCart, clearLocalCart } from "./cart";
 
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -106,6 +106,7 @@ export const login =
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+  dispatch(clearLocalCart());
 };
 
 export const loadingEnd = () => (dispatch) => {

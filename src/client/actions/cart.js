@@ -6,6 +6,7 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CART_ERROR,
+  CLEAR_LOCAL_CART,
 } from "./types";
 
 export const getCart = () => async (dispatch) => {
@@ -75,4 +76,10 @@ export const removeAllFromCart = (productId) => async (dispatch) => {
       payload: err.response.data.errors,
     });
   }
+};
+
+export const clearLocalCart = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_LOCAL_CART,
+  });
 };

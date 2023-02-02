@@ -3,6 +3,7 @@ import {
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
+  CLEAR_LOCAL_CART,
 } from "../actions/types";
 
 const initialState = {
@@ -19,9 +20,6 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
-  const numberfy = (num) => Number(Number(num).toFixed(2));
-  let newSubtotal;
-
   switch (type) {
     case GET_CART:
     case ADD_TO_CART:
@@ -31,6 +29,11 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         ...payload,
+      };
+    case CLEAR_LOCAL_CART:
+      return {
+        ...initialState,
+        isLoading: false,
       };
     default:
       return state;
