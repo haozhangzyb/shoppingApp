@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material/styles";
+import { useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -9,6 +9,7 @@ import {
   Skeleton,
   Badge,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -18,10 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { logout as logoutAction } from "../../actions/auth";
+import { getCart } from "../../actions/cart";
 import { openAuthModal } from "../../actions/authModal";
 import { openCartModal } from "../../actions/cartModal";
-import { useEffect } from "react";
-import { getCart } from "../../actions/cart";
+import { userType } from "../../Constants";
 
 const SearchBox = ({ isSmallScreen }) => {
   let style;
@@ -134,9 +135,15 @@ const Header = () => {
               // flexGrow={1}
             >
               {isSmallScreen ? (
-                <Typography variant='h5'>M</Typography>
+                <Typography variant='h5'>
+                  {authState.userType == userType.ADMIN ? "M" : "H"}
+                </Typography>
               ) : (
-                <Typography variant='h5'>Management</Typography>
+                <Typography variant='h5'>
+                  {authState.userType == userType.ADMIN
+                    ? "Management"
+                    : "Hi"}
+                </Typography>
               )}
               <Typography variant='subtitle1' sx={{ fontSize: "10px" }}>
                 Shopping
