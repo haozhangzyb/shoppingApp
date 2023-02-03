@@ -9,6 +9,7 @@ import {
   CLEAR_AUTH_ERRORS,
 } from "../actions/types";
 import setAuthToken from "../utils/setAuthToken";
+import { userType } from "../Constants";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -16,7 +17,7 @@ const initialState = {
   isLoading: true,
   user: null,
   errors: [],
-  userType: "customer",
+  userType: userType.CUSTOMER,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -57,6 +58,7 @@ const authReducer = (state = initialState, action) => {
         isLoading: false,
         user: null,
         errors: payload,
+        userType: userType.CUSTOMER,
       };
     case CLEAR_AUTH_ERRORS:
       return {

@@ -15,7 +15,7 @@ import { useTheme } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 
-import { authModalContentConstants } from "../../Constants";
+import { authModalContentConstants, userType } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 import { register as registerAction } from "../../actions/auth";
 import { setAuthModalContent } from "../../actions/authModal";
@@ -31,7 +31,7 @@ const Signup = ({ validationSchema }) => {
     initialValues: {
       email: "",
       password: "",
-      userType: "admin",
+      userType: userType.ADMIN,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -66,12 +66,12 @@ const Signup = ({ validationSchema }) => {
           onChange={formikFormData.handleChange}
         >
           <FormControlLabel
-            value='customer'
+            value={userType.CUSTOMER}
             control={<Radio />}
             label='Customer'
           />
           <FormControlLabel
-            value='admin'
+            value={userType.ADMIN}
             control={<Radio />}
             label='Admin'
           />

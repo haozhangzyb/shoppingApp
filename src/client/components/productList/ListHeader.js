@@ -10,13 +10,14 @@ import { Box, Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { productListSortMenuItems } from "../../Constants";
+import {
+  productListSortMenuItems,
+  userType as userTypeConstants,
+} from "../../Constants";
 
 const ListHeader = (props) => {
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(
-    (state) => state.authReducer.isAuthenticated
-  );
+  const userType = useSelector((state) => state.authReducer.userType);
   return (
     <Grid2
       container
@@ -60,7 +61,7 @@ const ListHeader = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        {isAuthenticated && (
+        {userType === userTypeConstants.ADMIN && (
           <Button
             variant='contained'
             sx={{

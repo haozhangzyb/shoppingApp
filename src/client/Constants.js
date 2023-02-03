@@ -65,3 +65,8 @@ export const AlertTypes = {
   WARNING: "warning",
   INFO: "info",
 };
+
+export const userType = {
+  ADMIN: "admin",
+  CUSTOMER: "customer",
+};

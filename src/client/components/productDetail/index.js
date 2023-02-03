@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import {
   Box,
   Button,
@@ -14,10 +15,12 @@ import AddToCartButton from "../productList/AddToCartButton";
 import { useSelector, useDispatch } from "react-redux";
 
 import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
-import { productObjPlaceholders } from "../../Constants";
+import {
+  productObjPlaceholders,
+  userType as userTypeConstants,
+} from "../../Constants";
 import ErrorPage from "../ErrorPage";
 import { getProduct, deleteProduct } from "../../actions/product";
-import { useEffect } from "react";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -29,9 +32,7 @@ const ProductDetail = () => {
   // const productObj = productObjPlaceholders.find((obj) => obj._id === id);
 
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(
-    (state) => state.authReducer.isAuthenticated
-  );
+  const userType = useSelector((state) => state.authReducer.userType);
   const productObj = useSelector((state) => state.productReducer.product);
   const productObjJson = JSON.stringify(productObj);
   const isLoading = useSelector((state) => state.productReducer.isLoading);
@@ -85,7 +86,7 @@ const ProductDetail = () => {
               productObj={productObj}
             />
 
-            {isAuthenticated && (
+            {userType === userTypeConstants.ADMIN && (
               <Button
                 variant='outlined'
                 size='small'
@@ -95,7 +96,7 @@ const ProductDetail = () => {
                 Edit
               </Button>
             )}
-            {isAuthenticated && (
+            {userType === userTypeConstants.ADMIN && (
               <Button
                 variant='contained'
                 sx={{

@@ -12,12 +12,11 @@ import { useSelector } from "react-redux";
 
 import AddToCartButton from "./AddToCartButton";
 import previewPlaceholder from "../../assets/image-preview-placeholder.jpg";
+import { userType as userTypeConstants } from "../../Constants";
 
 const ProductCard = ({ productObj }) => {
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(
-    (state) => state.authReducer.isAuthenticated
-  );
+  const userType = useSelector((state) => state.authReducer.userType);
 
   return (
     <Card
@@ -46,7 +45,7 @@ const ProductCard = ({ productObj }) => {
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
         <AddToCartButton productObj={productObj} />
-        {isAuthenticated && (
+        {userType === userTypeConstants.ADMIN && (
           <Button
             variant='contained'
             sx={{ bgcolor: "#4f48dd", width: "48%" }}
