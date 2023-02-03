@@ -11,7 +11,7 @@ import { secret } from "../../config/secret.js";
 // @access  Public
 router.post("/", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, userType } = req.body;
 
     // See if user exists
     let user = await User.findOne({ email });
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
         .json({ errors: [{ msg: "User already exists" }] });
     }
 
-    user = new User({ email, password });
+    user = new User({ email, password, userType });
 
     // Encrypt password
     const salt = await bcrypt.genSalt(10);
@@ -45,6 +45,7 @@ router.post("/", async (req, res) => {
       }
     );
   } catch (error) {
+    console.error(error);
     return res.status(500).send("Server error");
   }
 });

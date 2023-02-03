@@ -16,6 +16,7 @@ const initialState = {
   isLoading: true,
   user: null,
   errors: [],
+  userType: "customer",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -23,11 +24,13 @@ const authReducer = (state = initialState, action) => {
 
   switch (type) {
     case USER_LOADED:
+      // payload:{user:{email, userType}}
       return {
         ...state,
         isAuthenticated: true,
         isLoading: false,
         user: payload,
+        userType: payload.userType,
       };
 
     case REGISTER_SUCCESS:

@@ -10,6 +10,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userType: {
+    type: String,
+    enum: ["admin", "customer"],
+    required: true,
+  },
 });
 
 export default mongoose.models.user || mongoose.model("user", UserSchema);

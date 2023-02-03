@@ -5,6 +5,10 @@ import {
   Button,
   Link,
   useMediaQuery,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Stack,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useTheme } from "@mui/material/styles";
@@ -27,6 +31,7 @@ const Signup = ({ validationSchema }) => {
     initialValues: {
       email: "",
       password: "",
+      userType: "admin",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -52,6 +57,25 @@ const Signup = ({ validationSchema }) => {
           formikFormData={formikFormData}
           inputName='password'
         />
+
+        <Typography sx={{ mt: 2 }}>User Type: </Typography>
+        <RadioGroup
+          name='userType'
+          row
+          value={formikFormData.values.userType}
+          onChange={formikFormData.handleChange}
+        >
+          <FormControlLabel
+            value='customer'
+            control={<Radio />}
+            label='Customer'
+          />
+          <FormControlLabel
+            value='admin'
+            control={<Radio />}
+            label='Admin'
+          />
+        </RadioGroup>
 
         <Button
           type='submit'

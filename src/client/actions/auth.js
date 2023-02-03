@@ -40,13 +40,13 @@ export const loadUser = () => async (dispatch) => {
 };
 
 export const register =
-  ({ email, password }) =>
+  ({ email, password, userType }) =>
   async (dispatch) => {
     const headers = {
       "Content-Type": "application/json",
     };
 
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ email, password, userType });
 
     try {
       const res = await axios.post("/api/users", body, { headers });
@@ -59,7 +59,7 @@ export const register =
       dispatch(loadUser());
       dispatch(closeAuthModal());
     } catch (err) {
-      console.error(err.response.data.errors);
+      console.error(err);
       dispatch({
         type: REGISTER_FAIL,
         payload: err.response.data.errors,
