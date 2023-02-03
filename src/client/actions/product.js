@@ -8,6 +8,7 @@ import {
   UPDATE_PRODUCT,
   PRODUCT_ERROR,
   PRODUCT_LOADING_START,
+  SET_SEARCH_INPUT,
 } from "./types";
 
 export const getProductList = () => async (dispatch) => {
@@ -105,4 +106,11 @@ export const updateProduct = (id, formData) => async (dispatch) => {
       payload: err.response.data.errors,
     });
   }
+};
+
+export const setSearchInput = (e) => (dispatch) => {
+  dispatch({
+    type: SET_SEARCH_INPUT,
+    payload: e.target.value,
+  });
 };

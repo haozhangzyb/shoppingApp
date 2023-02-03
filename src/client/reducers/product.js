@@ -6,6 +6,7 @@ import {
   UPDATE_PRODUCT,
   PRODUCT_ERROR,
   PRODUCT_LOADING_START,
+  SET_SEARCH_INPUT,
 } from "../actions/types";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   product: null,
   isLoading: true,
   error: {},
+  searchInput: "",
 };
 
 const productReducer = (state = initialState, action) => {
@@ -65,6 +67,11 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+    case SET_SEARCH_INPUT:
+      return {
+        ...state,
+        searchInput: payload,
       };
     default:
       return state;

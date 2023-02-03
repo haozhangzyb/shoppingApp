@@ -52,7 +52,10 @@ const ProductList = () => {
     }
   };
 
-  const productsPlaceholder = () => {
+  const searchInput = useSelector(
+    (state) => state.productReducer.searchInput
+  );
+  const renderProductList = () => {
     if (isLoading) {
       return <div>Loading...</div>;
     }
@@ -60,7 +63,11 @@ const ProductList = () => {
       return <div>No product</div>;
     }
 
-    const sortedProducts = getSortedProducts(productList);
+    const filteredProductList = productList.filter((product) =>
+      product.name.toUpperCase().includes(searchInput.toUpperCase())
+    );
+
+    const sortedProducts = getSortedProducts(filteredProductList);
 
     const pagedProducts = sortedProducts.slice(
       itemNumberPerPage * (pageNumber - 1),
@@ -99,7 +106,7 @@ const ProductList = () => {
           handleChange={(e) => setSortMenuValue(e.target.value)}
         ></ListHeader>
         <Grid container spacing={2}>
-          {productsPlaceholder()}
+          {renderProductList()}
         </Grid>
         {productList && (
           <Box

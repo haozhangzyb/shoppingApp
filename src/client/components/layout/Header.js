@@ -23,8 +23,9 @@ import { getCart } from "../../actions/cart";
 import { openAuthModal } from "../../actions/authModal";
 import { openCartModal } from "../../actions/cartModal";
 import { userType } from "../../Constants";
+import { setSearchInput } from "../../actions/product";
 
-const SearchBox = ({ isSmallScreen }) => {
+const SearchBox = ({ isSmallScreen, onChange, value }) => {
   let style;
   if (isSmallScreen) {
     style = { width: "100%" };
@@ -36,6 +37,8 @@ const SearchBox = ({ isSmallScreen }) => {
   }
   return (
     <Input
+      onChange={(e) => onChange(e)}
+      value={value}
       sx={{
         // display: {
         //   xs: "none",
@@ -77,6 +80,9 @@ const Header = () => {
   const cartStateJson = JSON.stringify(cartState);
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
+  );
+  const searchInput = useSelector(
+    (state) => state.productReducer.searchInput
   );
 
   useEffect(() => {
@@ -149,7 +155,13 @@ const Header = () => {
                 Shopping
               </Typography>
             </Stack>
-            {!isSmallScreen && <SearchBox isSmallScreen={isSmallScreen} />}
+            {!isSmallScreen && (
+              <SearchBox
+                isSmallScreen={isSmallScreen}
+                onChange={(e) => setSearchInput(e)(dispatch)}
+                value={searchInput}
+              />
+            )}
 
             <Stack
               direction={"row"}
@@ -185,7 +197,11 @@ const Header = () => {
         </Toolbar>
         {isSmallScreen && (
           <Toolbar>
-            <SearchBox isSmallScreen={isSmallScreen} />
+            <SearchBox
+              isSmallScreen={isSmallScreen}
+              onChange={(e) => setSearchInput(e)(dispatch)}
+              value={searchInput}
+            />
           </Toolbar>
         )}
       </AppBar>
