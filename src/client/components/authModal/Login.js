@@ -108,11 +108,11 @@ const Login = ({ validationSchema }) => {
             underline='none'
             onClick={() =>
               setAuthModalContent(
-                authModalContentConstants.FORGOT_PASSWORD
+                authModalContentConstants.UPDATE_PASSWORD
               )(dispatch)
             }
           >
-            Forgot password?
+            Update password
           </Link>
         </Grid>
       </Grid>

@@ -32,7 +32,11 @@ const WrappedInput = ({ formikFormData, inputName }) => {
         id={inputName}
         name={inputName}
         autoComplete={inputName}
-        type={inputName === "password" ? "password" : "text"}
+        type={
+          inputName.includes("password") || inputName.includes("Password")
+            ? "password"
+            : "text"
+        }
         onChange={(e) => {
           formikFormData.handleChange(e);
           // clearErrors()(dispatch);

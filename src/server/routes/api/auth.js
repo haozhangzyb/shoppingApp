@@ -87,4 +87,38 @@ router.post("/forgot-password/:email", async (req, res) => {
   }
 });
 
+// @route   POST /api/auth/update-password
+// @desc    update password
+// @access  Public
+router.post("/update-password/", async (req, res) => {
+  try {
+    const { email, password, newPassword } = req.body;
+
+    // See if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "Invalid email" }] });
+    }
+
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid credentials" }] });
+    }
+
+    // Encrypt password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+
+    await user.save();
+
+    return res.json({ msg: "Update successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Server error");
+  }
+});
+
 export default router;

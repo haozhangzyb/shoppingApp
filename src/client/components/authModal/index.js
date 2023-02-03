@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { authModalContentConstants } from "../../Constants";
 import Login from "./Login";
 import Signup from "./Signup";
-import ForgotPassword from "./ForgotPassword";
-import { ResetEmailSent } from "./ResetEmailSent";
+import UpdatePassword from "./UpdatePassword";
+import { UpdatePasswordSuccess } from "./UpdatePasswordSuccess";
 import { closeAuthModal } from "../../actions/authModal";
 
 const AuthModal = () => {
@@ -86,11 +86,12 @@ const AuthModal = () => {
         {modalContent === authModalContentConstants.SIGN_UP && (
           <Signup validationSchema={validationSchema} />
         )}
-        {modalContent === authModalContentConstants.FORGOT_PASSWORD && (
-          <ForgotPassword validationSchema={emailValidationSchema} />
+        {modalContent === authModalContentConstants.UPDATE_PASSWORD && (
+          <UpdatePassword validationSchema={emailValidationSchema} />
         )}
-        {modalContent === authModalContentConstants.RESET_EMAIL_SENT && (
-          <ResetEmailSent />
+        {modalContent ===
+          authModalContentConstants.UPDATE_PASSWORD_SUCCESSFULLY && (
+          <UpdatePasswordSuccess />
         )}
       </Container>
     </Modal>

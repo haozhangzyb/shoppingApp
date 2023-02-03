@@ -123,7 +123,9 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     console.log(res.data);
     dispatch(
-      setAuthModalContent(authModalContentConstants.RESET_EMAIL_SENT)
+      setAuthModalContent(
+        authModalContentConstants.UPDATE_PASSWORD_SUCCESSFULLY
+      )
     );
   } catch (err) {
     dispatch({
@@ -136,3 +138,31 @@ export const forgotPassword = (email) => async (dispatch) => {
     }, 2000);
   }
 };
+
+export const updatePassword =
+  ({ email, password, newPassword }) =>
+  async (dispatch) => {
+    try {
+      const res = await axios.post(`/api/auth/update-password/`, {
+        email,
+        password,
+        newPassword,
+      });
+
+      console.log(res.data);
+      dispatch(
+        setAuthModalContent(
+          authModalContentConstants.UPDATE_PASSWORD_SUCCESSFULLY
+        )
+      );
+    } catch (err) {
+      dispatch({
+        type: AUTH_ERROR,
+        payload: err.response.data.errors,
+      });
+
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 2000);
+    }
+  };

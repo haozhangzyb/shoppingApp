@@ -7,20 +7,22 @@ import { useDispatch } from "react-redux";
 import { authModalContentConstants } from "../../Constants";
 import WrappedInput from "./WrappedInput";
 import { setAuthModalContent } from "../../actions/authModal";
-import { forgotPassword } from "../../actions/auth";
+import { updatePassword } from "../../actions/auth";
 
-const ForgotPassword = ({ validationSchema }) => {
+const UpdatePassword = ({ validationSchema }) => {
   const dispatch = useDispatch();
 
   const formikFormData = useFormik({
     initialValues: {
       email: "",
+      password: "",
+      newPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // console.log(values);
-      forgotPassword(values)(dispatch);
-      // setAuthModalContent(authModalContentConstants.RESET_EMAIL_SENT)(
+      updatePassword(values)(dispatch);
+      // setAuthModalContent(authModalContentConstants.UPDATE_PASSWORD_SUCCESSFULLY)(
       //   dispatch
       // );
     },
@@ -31,19 +33,27 @@ const ForgotPassword = ({ validationSchema }) => {
       <Typography component='h1' variant='h5' align='center'>
         Update your password
       </Typography>
-      <Typography
+      {/* <Typography
         align='center'
         variant='subtitle1'
         sx={{ fontSize: "0.8rem", color: "grey" }}
       >
         Enter your email, we'll send you the recovery link
-      </Typography>
+      </Typography> */}
       <Box
         component='form'
         onSubmit={formikFormData.handleSubmit}
         noValidate
       >
         <WrappedInput formikFormData={formikFormData} inputName='email' />
+        <WrappedInput
+          formikFormData={formikFormData}
+          inputName='password'
+        />
+        <WrappedInput
+          formikFormData={formikFormData}
+          inputName='newPassword'
+        />
 
         <Button
           type='submit'
@@ -84,4 +94,4 @@ const ForgotPassword = ({ validationSchema }) => {
   );
 };
 
-export default ForgotPassword;
+export default UpdatePassword;
