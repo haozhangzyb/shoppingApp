@@ -12,8 +12,12 @@ import { productObjPlaceholders } from "../../Constants";
 import { getProductList } from "../../actions/product";
 import { useEffect } from "react";
 import { useMemo } from "react";
+import { Box, Pagination } from "@mui/material";
 
 const ProductList = () => {
+  const itemNumberPerPage = 6;
+  const [pageNumber, setPageNumber] = useState(1);
+
   const [sortMenuValue, setSortMenuValue] = useState(
     productListSortMenuItems.LAST_ADDED
   );
@@ -30,30 +34,49 @@ const ProductList = () => {
     dispatch(getProductList());
   }, [productListJson, dispatch]);
 
-  const productsPlaceholder = () => {
-    if (isLoading) {
-      return <div>Loading...</div>;
-    }
-    let sortedProducts;
+  const getSortedProducts = (unsortedProducts) => {
     if (sortMenuValue === productListSortMenuItems.PRICE_HIGH_TO_LOW) {
-      sortedProducts = productList.sort((a, b) => {
+      return unsortedProducts.sort((a, b) => {
         return b.price - a.price;
       });
     } else if (
       sortMenuValue === productListSortMenuItems.PRICE_LOW_TO_HIGH
     ) {
-      sortedProducts = productList.sort((a, b) => {
+      return unsortedProducts.sort((a, b) => {
         return a.price - b.price;
       });
     } else if (sortMenuValue === productListSortMenuItems.LAST_ADDED) {
-      sortedProducts = productList.sort((a, b) => {
+      return unsortedProducts.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
     }
+  };
 
-    return sortedProducts.map((productObj) => {
+  const productsPlaceholder = () => {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+    if (!productList) {
+      return <div>No product</div>;
+    }
+
+    const sortedProducts = getSortedProducts(productList);
+
+    const pagedProducts = sortedProducts.slice(
+      itemNumberPerPage * (pageNumber - 1),
+      itemNumberPerPage * pageNumber
+    );
+
+    return pagedProducts.map((productObj) => {
       return (
-        <Grid item xs={12} sm={6} md={4} lg={2.4} key={productObj._id}>
+        <Grid
+          item
+          xs={12}
+          sm={itemNumberPerPage}
+          md={4}
+          lg={2.4}
+          key={productObj._id}
+        >
           <ProductCard productObj={productObj} />
         </Grid>
       );
@@ -78,6 +101,22 @@ const ProductList = () => {
         <Grid container spacing={2}>
           {productsPlaceholder()}
         </Grid>
+        {productList && (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              width: "100%",
+              mt: 2,
+            }}
+          >
+            <Pagination
+              count={Math.ceil(productList.length / itemNumberPerPage)}
+              page={pageNumber}
+              onChange={(e, value) => setPageNumber(value)}
+            />
+          </Box>
+        )}
       </Grid>
     </Grid>
   );
