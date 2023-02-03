@@ -125,7 +125,9 @@ const AddProduct = ({ isEditingProduct }) => {
   return (
     <Grid2 container justifyContent={"center"}>
       <Grid2 xs={11} maxWidth={700}>
-        <Typography variant='h5'>Create Product</Typography>
+        <Typography variant='h5'>
+          {isEditingProduct ? "Edit" : "Create"} Product
+        </Typography>
 
         <Box sx={{ mt: 2, p: 4, bgcolor: "white" }}>
           <Grid2
