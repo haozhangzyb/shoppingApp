@@ -26,7 +26,7 @@ router.get("/", jwtTokenToUserId, async (req, res) => {
     return res.status(200).json(cart);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Server Error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -67,7 +67,7 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
     return res.status(200).json(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -79,7 +79,7 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
     let cart = await findCart(req.user._id);
 
     if (cart.products.length === 0) {
-      return res.status(400).json({ msg: "Cart is empty" });
+      return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }
 
     const product = cart.products.find(
@@ -89,7 +89,7 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
     if (!product) {
       return res
         .status(400)
-        .json({ msg: "Product not found in your cart" });
+        .json({ errors: [{ msg: "Product not found in your cart" }] });
     }
 
     cart.products = cart.products.filter(
@@ -107,7 +107,7 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
     return res.status(200).json(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -119,7 +119,7 @@ router.put("/", jwtTokenToUserId, async (req, res) => {
     let cart = await findCart(req.user._id);
 
     if (cart.products.length === 0) {
-      return res.status(400).json({ msg: "Cart is empty" });
+      return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }
 
     const product = cart.products.find(
@@ -129,7 +129,7 @@ router.put("/", jwtTokenToUserId, async (req, res) => {
     if (!product) {
       return res
         .status(400)
-        .json({ msg: "Product not found in your cart" });
+        .json({ errors: [{ msg: "Product not found in your cart" }] });
     }
 
     if (product.inCartQuantity === 1) {
@@ -154,7 +154,7 @@ router.put("/", jwtTokenToUserId, async (req, res) => {
     return res.status(200).json(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 

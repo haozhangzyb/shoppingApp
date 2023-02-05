@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     return res.json(products);
   } catch (error) {
     console.error(error);
-    return res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
     return res.json(product);
   } catch (error) {
     console.error(error);
-    return res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -52,7 +52,7 @@ router.delete("/:id", jwtTokenToUserId, async (req, res) => {
     return res.json({ msg: "Product removed" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -78,7 +78,7 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
     return res.json(newProduct);
   } catch (error) {
     console.error(error);
-    return res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -114,7 +114,7 @@ router.put("/:id", jwtTokenToUserId, async (req, res) => {
     return res.json(product);
   } catch (error) {
     console.error(error);
-    return res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 

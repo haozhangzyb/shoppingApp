@@ -8,7 +8,13 @@ export default function (req, res, next) {
 
   // Check if no token
   if (!token) {
-    return res.status(401).json({ msg: "No token, authorization denied" });
+    return res
+      .status(401)
+      .json({
+        errors: [
+          { msg: "No Token. Authentication failed. Please log in" },
+        ],
+      });
   }
 
   // Verify token
@@ -17,6 +23,6 @@ export default function (req, res, next) {
     req.user = decoded.user;
     next();
   } catch (err) {
-    return res.status(401).json({ msg: "Invalid Token" });
+    return res.status(401).json({ errors: [{ msg: "Invalid Token" }] });
   }
 }

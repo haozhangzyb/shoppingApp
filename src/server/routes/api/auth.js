@@ -19,7 +19,7 @@ router.get("/", jwtTokenToUserId, async (req, res) => {
     res.json(user);
   } catch (err) {
     console.log(err.msg);
-    return res.status(500).send("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
     );
   } catch (error) {
     console.log(err.message);
-    res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -83,7 +83,7 @@ router.post("/forgot-password/:email", async (req, res) => {
     return res.json({ msg: "Email sent" });
   } catch (error) {
     console.log(error);
-    res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
@@ -117,7 +117,7 @@ router.post("/update-password/", async (req, res) => {
     return res.json({ msg: "Update successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json("Server error");
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 });
 
