@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import { addAlert } from "./alert";
+import { AlertTypes } from "../Constants";
+
 import {
   GET_CART,
   ADD_TO_CART,
@@ -19,10 +22,19 @@ export const getCart = () => async (dispatch) => {
     });
   } catch (err) {
     console.error(err.response.data);
-    dispatch({
-      type: CART_ERROR,
-      payload: err.response.data.errors,
-    });
+
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      dispatch({
+        type: CART_ERROR,
+        payload: err.response.data.errors,
+      });
+
+      errors.forEach((error) =>
+        dispatch(addAlert(error.msg, AlertTypes.INFO))
+      );
+    }
   }
 };
 
@@ -36,10 +48,19 @@ export const addToCart = (productId) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err.response.data);
-    dispatch({
-      type: CART_ERROR,
-      payload: err.response.data.errors,
-    });
+
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      dispatch({
+        type: CART_ERROR,
+        payload: err.response.data.errors,
+      });
+
+      errors.forEach((error) =>
+        dispatch(addAlert(error.msg, AlertTypes.INFO))
+      );
+    }
   }
 };
 
@@ -53,10 +74,18 @@ export const removeOneFromCart = (productId) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err.response.data);
-    dispatch({
-      type: CART_ERROR,
-      payload: err.response.data.errors,
-    });
+
+    const errors = err.response.data.errors;
+    if (errors) {
+      dispatch({
+        type: CART_ERROR,
+        payload: err.response.data.errors,
+      });
+
+      errors.forEach((error) =>
+        dispatch(addAlert(error.msg, AlertTypes.INFO))
+      );
+    }
   }
 };
 
@@ -71,10 +100,18 @@ export const removeAllFromCart = (productId) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err.response.data);
-    dispatch({
-      type: CART_ERROR,
-      payload: err.response.data.errors,
-    });
+
+    const errors = err.response.data.errors;
+    if (errors) {
+      dispatch({
+        type: CART_ERROR,
+        payload: err.response.data.errors,
+      });
+
+      errors.forEach((error) =>
+        dispatch(addAlert(error.msg, AlertTypes.INFO))
+      );
+    }
   }
 };
 

@@ -4,7 +4,7 @@ import { ADD_ALERT, REMOVE_ALERT } from "./types";
 
 // "success", "error", "warning", "info"
 export const addAlert =
-  (msg, alertType, timeout = 3000) =>
+  (msg, alertType, timeout = 4000) =>
   (dispatch) => {
     const id = uuidv4();
     dispatch({
@@ -12,10 +12,7 @@ export const addAlert =
       payload: { id, msg, alertType },
     });
 
-    setTimeout(
-      () => dispatch({ type: REMOVE_ALERT, payload: id }),
-      timeout
-    );
+    setTimeout(() => dispatch(removeAlert(id)), timeout);
   };
 
 export const removeAlert = (id) => (dispatch) => {

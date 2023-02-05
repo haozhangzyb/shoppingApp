@@ -22,6 +22,7 @@ import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser, logout, loadingEnd } from "./actions/auth";
 import { getCart } from "./actions/cart";
+import Alerts from "./components/Alerts";
 
 function App() {
   useEffect(() => {
@@ -58,6 +59,7 @@ function App() {
           }}
         >
           <Header />
+          <Alerts />
           <AuthModal />
           <CartModal />
 
