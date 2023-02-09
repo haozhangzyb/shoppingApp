@@ -11,6 +11,7 @@ import {
   CART_ERROR,
   CLEAR_LOCAL_CART,
   APPLY_COUPON,
+  REMOVE_COUPON,
 } from "./types";
 
 export const getCart = () => async (dispatch) => {
@@ -136,6 +137,35 @@ export const applyCoupon = (coupon) => async (dispatch) => {
 
     dispatch({
       type: APPLY_COUPON,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.error(err.response.data);
+
+    const errors = err.response.data.errors;
+    if (errors) {
+      dispatch({
+        type: CART_ERROR,
+        payload: err.response.data.errors
+          .map((error) => error.msg)
+          .join(","),
+      });
+
+      errors.forEach((error) =>
+        dispatch(addAlert(error.msg, AlertTypes.INFO))
+      );
+    }
+  }
+};
+
+export const removeCoupon = (couponId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/cart/coupon`, {
+      data: { couponId },
+    });
+
+    dispatch({
+      type: REMOVE_COUPON,
       payload: res.data,
     });
   } catch (err) {

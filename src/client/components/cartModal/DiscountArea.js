@@ -11,7 +11,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
-import { applyCoupon } from "../../actions/cart";
+import { applyCoupon, removeCoupon } from "../../actions/cart";
 
 const DiscountArea = () => {
   const dispatch = useDispatch();
@@ -32,8 +32,8 @@ const DiscountArea = () => {
     },
   });
 
-  const handleDelete = (coupon) => {
-    // dispatch(applyCoupon(coupon));
+  const handleDelete = (couponId) => {
+    dispatch(removeCoupon(couponId));
   };
 
   return (
@@ -87,7 +87,7 @@ const DiscountArea = () => {
             <Chip
               label={item.code}
               key={item.id}
-              onDelete={handleDelete}
+              onDelete={() => handleDelete(item.id)}
             />
           ))}
         </Stack>

@@ -80,10 +80,6 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
   try {
     let cart = await Cart.findOne({ user: req.user._id });
     if (!cart) {
-      cart = new Cart({ user: req.user._id, products: [] });
-    }
-
-    if (cart.products.length === 0) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }
 
@@ -123,10 +119,6 @@ router.put("/", jwtTokenToUserId, async (req, res) => {
   try {
     let cart = await Cart.findOne({ user: req.user._id });
     if (!cart) {
-      cart = new Cart({ user: req.user._id, products: [] });
-    }
-
-    if (cart.products.length === 0) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }
 
@@ -179,9 +171,9 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
       cart = new Cart({ user: req.user._id, products: [] });
     }
 
-    if (cart.products.length === 0) {
-      return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
-    }
+    // if (cart.products.length === 0) {
+    //   return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
+    // }
 
     if (!req.body.coupon) {
       return res
@@ -214,6 +206,47 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
 
     cart.coupons.push(coupon);
     cart.discount += coupon.discount;
+    cart.total = Math.max(
+      0,
+      numberfy(cart.subtotal + cart.tax - cart.discount)
+    );
+
+    cart = await cart.save();
+    return res.status(200).json(cart);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+});
+
+// @route   DELETE api/cart/coupon
+// @desc    Remove coupon from cart
+// @access  Private
+router.delete("/coupon", jwtTokenToUserId, async (req, res) => {
+  try {
+    let cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) {
+      return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
+    }
+
+    if (!req.body.couponId) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Coupon is required" }] });
+    }
+
+    const appliedCoupon = cart.coupons.find(
+      (c) => c.id === req.body.couponId
+    );
+
+    if (!appliedCoupon) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Coupon not applied" }] });
+    }
+
+    cart.discount -= appliedCoupon.discount;
+    cart.coupons = cart.coupons.filter((c) => c.id !== req.body.couponId);
     cart.total = Math.max(
       0,
       numberfy(cart.subtotal + cart.tax - cart.discount)

@@ -6,6 +6,7 @@ import {
   CLEAR_LOCAL_CART,
   CART_ERROR,
   APPLY_COUPON,
+  REMOVE_COUPON,
 } from "../actions/types";
 
 const initialState = {
@@ -29,6 +30,7 @@ const cartReducer = (state = initialState, action) => {
     case REMOVE_ONE_FROM_CART:
     case REMOVE_ALL_FROM_CART:
     case APPLY_COUPON:
+    case REMOVE_COUPON:
       return {
         ...state,
         ...payload,
