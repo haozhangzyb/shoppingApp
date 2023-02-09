@@ -5,16 +5,6 @@ import Product from "../../models/Product.js";
 import Cart from "../../models/Cart.js";
 import jwtTokenToUserId from "../../middleware/jwtTokenToUserId.js";
 
-const findCart = async (userId) => {
-  let cart = await Cart.findOne({ user: userId });
-
-  if (!cart) {
-    cart = new Cart({ user: userId, products: [] });
-    cart = await cart.save();
-  }
-  return cart;
-};
-
 const numberfy = (num) => Number(Number(num).toFixed(2));
 
 // @route   GET api/cart
@@ -22,7 +12,12 @@ const numberfy = (num) => Number(Number(num).toFixed(2));
 // @access  Private
 router.get("/", jwtTokenToUserId, async (req, res) => {
   try {
-    const cart = await findCart(req.user._id);
+    let cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) {
+      cart = new Cart({ user: req.user._id, products: [] });
+      cart = await cart.save();
+    }
+
     return res.status(200).json(cart);
   } catch (err) {
     console.error(err);
@@ -35,7 +30,11 @@ router.get("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.post("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await findCart(req.user._id);
+    let cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) {
+      cart = new Cart({ user: req.user._id, products: [] });
+    }
+
     let product = await Product.findById(req.body.productId);
     if (!product)
       return res.status(400).json({ msg: "Product not found" });
@@ -76,7 +75,10 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.delete("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await findCart(req.user._id);
+    let cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) {
+      cart = new Cart({ user: req.user._id, products: [] });
+    }
 
     if (cart.products.length === 0) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
@@ -116,7 +118,10 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.put("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await findCart(req.user._id);
+    let cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) {
+      cart = new Cart({ user: req.user._id, products: [] });
+    }
 
     if (cart.products.length === 0) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
