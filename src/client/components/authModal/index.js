@@ -87,7 +87,7 @@ const AuthModal = () => {
           <Signup validationSchema={validationSchema} />
         )}
         {modalContent === authModalContentConstants.UPDATE_PASSWORD && (
-          <UpdatePassword validationSchema={emailValidationSchema} />
+          <UpdatePassword />
         )}
         {modalContent ===
           authModalContentConstants.UPDATE_PASSWORD_SUCCESSFULLY && (

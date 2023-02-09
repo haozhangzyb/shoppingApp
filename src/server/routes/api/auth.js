@@ -97,7 +97,9 @@ router.post("/update-password/", async (req, res) => {
     // See if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ errors: [{ msg: "Invalid email" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid credentials" }] });
     }
 
     // Compare password
