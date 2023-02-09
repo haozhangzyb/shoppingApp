@@ -11,7 +11,7 @@ const Alerts = () => {
       <Alert
         severity={alert.alertType}
         key={alert.id}
-        sx={{ mb: 1, maxHeight: 50 }}
+        sx={{ mb: 1, maxHeight: 50, zIndex: 999999 }}
       >
         {alert.msg}
       </Alert>

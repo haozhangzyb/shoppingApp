@@ -179,9 +179,9 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
       cart = new Cart({ user: req.user._id, products: [] });
     }
 
-    // if (cart.products.length === 0) {
-    //   return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
-    // }
+    if (cart.products.length === 0) {
+      return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
+    }
 
     if (!req.body.coupon) {
       return res
@@ -189,22 +189,31 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
         .json({ errors: [{ msg: "Coupon is required" }] });
     }
 
-    const validCoupons = { "10OFF": 10, "20OFF": 20, "30OFF": 30 };
+    const validCoupons = [
+      { id: "1", code: "10OFF", discount: 10 },
+      { id: "2", code: "20OFF", discount: 20 },
+      { id: "3", code: "30OFF", discount: 30 },
+    ];
 
     const upperReqBodyCoupon = req.body.coupon.toUpperCase();
 
-    if (!validCoupons[upperReqBodyCoupon]) {
+    const coupon = validCoupons.find((c) => c.code === upperReqBodyCoupon);
+
+    if (!coupon) {
       return res.status(400).json({ errors: [{ msg: "Invalid coupon" }] });
     }
 
-    if (cart.coupons.includes(upperReqBodyCoupon)) {
+    const isCouponAlreadyApplied = cart.coupons.some(
+      (c) => c.code === upperReqBodyCoupon
+    );
+    if (isCouponAlreadyApplied) {
       return res
         .status(400)
         .json({ errors: [{ msg: "Coupon already applied" }] });
     }
 
-    cart.coupons.push(upperReqBodyCoupon);
-    cart.discount += validCoupons[upperReqBodyCoupon];
+    cart.coupons.push(coupon);
+    cart.discount += coupon.discount;
     cart.total = Math.max(
       0,
       numberfy(cart.subtotal + cart.tax - cart.discount)

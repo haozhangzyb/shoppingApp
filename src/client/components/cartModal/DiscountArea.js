@@ -1,13 +1,21 @@
 import React from "react";
-import { Box, Stack, TextField, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Stack,
+  TextField,
+  Typography,
+  Button,
+  Chip,
+} from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useDispatch } from "react-redux";
 import { applyCoupon } from "../../actions/cart";
 
 const DiscountArea = () => {
   const dispatch = useDispatch();
+  const cartState = useSelector((state) => state.cartReducer);
 
   const formikFormData = useFormik({
     initialValues: {
@@ -23,6 +31,10 @@ const DiscountArea = () => {
       dispatch(applyCoupon(values.couponCode));
     },
   });
+
+  const handleDelete = (coupon) => {
+    // dispatch(applyCoupon(coupon));
+  };
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -64,6 +76,22 @@ const DiscountArea = () => {
           Apply
         </Button>
       </Stack>
+      {cartState.coupons.length !== 0 && (
+        <Stack
+          direction='row'
+          // justifyContent='space-around'
+          spacing={1}
+          sx={{ mt: 1 }}
+        >
+          {cartState.coupons.map((item) => (
+            <Chip
+              label={item.code}
+              key={item.id}
+              onDelete={handleDelete}
+            />
+          ))}
+        </Stack>
+      )}
     </Box>
   );
 };
