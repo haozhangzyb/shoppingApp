@@ -13,8 +13,9 @@ function PriceStack(props) {
       <Typography variant='h7' fontWeight={"bold"}>
         {props.title}
       </Typography>
+
       <Typography variant='h7' fontWeight={"bold"}>
-        ${props.price}
+        {props.title === "Coupons" ? props.price : `$${props.price}`}
       </Typography>
     </Stack>
   );
@@ -25,6 +26,10 @@ const TotalPriceArea = ({ cartState }) => {
     <Box sx={{ mt: 3 }}>
       {PriceStack({ title: "Subtotal", price: cartState.subtotal })}
       {PriceStack({ title: "Tax", price: cartState.tax })}
+      {PriceStack({
+        title: "Coupons",
+        price: cartState.coupons.join(", "),
+      })}
       {PriceStack({ title: "Discount", price: cartState.discount })}
       {PriceStack({ title: "Estimated Total", price: cartState.total })}
     </Box>

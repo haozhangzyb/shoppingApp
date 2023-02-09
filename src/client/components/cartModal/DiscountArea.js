@@ -3,7 +3,12 @@ import { Box, Stack, TextField, Typography, Button } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
+import { useDispatch } from "react-redux";
+import { applyCoupon } from "../../actions/cart";
+
 const DiscountArea = () => {
+  const dispatch = useDispatch();
+
   const formikFormData = useFormik({
     initialValues: {
       couponCode: "",
@@ -14,7 +19,8 @@ const DiscountArea = () => {
         .required("Enter a valid coupon code"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      dispatch(applyCoupon(values.couponCode));
     },
   });
 

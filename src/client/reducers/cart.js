@@ -4,15 +4,18 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_LOCAL_CART,
+  CART_ERROR,
+  APPLY_COUPON,
 } from "../actions/types";
 
 const initialState = {
   products: [],
   isLoading: true,
-  error: {},
+  error: "",
   totalQuantity: 0,
   subtotal: 0.0,
   tax: 0.0,
+  coupons: [],
   discount: 0.0,
   total: 0.0,
 };
@@ -25,15 +28,23 @@ const cartReducer = (state = initialState, action) => {
     case ADD_TO_CART:
     case REMOVE_ONE_FROM_CART:
     case REMOVE_ALL_FROM_CART:
+    case APPLY_COUPON:
       return {
         ...state,
-        isLoading: false,
         ...payload,
+        isLoading: false,
+        error: "",
       };
     case CLEAR_LOCAL_CART:
       return {
         ...initialState,
         isLoading: false,
+      };
+    case CART_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: payload,
       };
     default:
       return state;

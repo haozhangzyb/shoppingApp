@@ -179,9 +179,9 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
       cart = new Cart({ user: req.user._id, products: [] });
     }
 
-    if (cart.products.length === 0) {
-      return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
-    }
+    // if (cart.products.length === 0) {
+    //   return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
+    // }
 
     if (!req.body.coupon) {
       return res
@@ -191,18 +191,20 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
 
     const validCoupons = { "10OFF": 10, "20OFF": 20, "30OFF": 30 };
 
-    if (!validCoupons[req.body.coupon]) {
+    const upperReqBodyCoupon = req.body.coupon.toUpperCase();
+
+    if (!validCoupons[upperReqBodyCoupon]) {
       return res.status(400).json({ errors: [{ msg: "Invalid coupon" }] });
     }
 
-    if (cart.coupons.includes(req.body.coupon)) {
+    if (cart.coupons.includes(upperReqBodyCoupon)) {
       return res
         .status(400)
         .json({ errors: [{ msg: "Coupon already applied" }] });
     }
 
-    cart.coupons.push(req.body.coupon);
-    cart.discount += validCoupons[req.body.coupon];
+    cart.coupons.push(upperReqBodyCoupon);
+    cart.discount += validCoupons[upperReqBodyCoupon];
     cart.total = Math.max(
       0,
       numberfy(cart.subtotal + cart.tax - cart.discount)
