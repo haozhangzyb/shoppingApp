@@ -102,8 +102,10 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
       cart.subtotal - product.price * product.inCartQuantity
     );
     cart.tax = numberfy(cart.subtotal * 0.1);
-    cart.total = numberfy(cart.subtotal + cart.tax - cart.discount);
-
+    cart.total = Math.max(
+      0,
+      numberfy(cart.subtotal + cart.tax - cart.discount)
+    );
     cart = await cart.save();
     return res.status(200).json(cart);
   } catch (error) {
