@@ -104,7 +104,7 @@ const ProductList = () => {
         <ListHeader
           sortMenuValue={sortMenuValue}
           handleChange={(e) => setSortMenuValue(e.target.value)}
-        ></ListHeader>
+        />
         <Grid container spacing={2}>
           {renderProductList()}
         </Grid>
