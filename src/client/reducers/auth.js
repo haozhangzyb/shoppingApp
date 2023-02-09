@@ -53,7 +53,7 @@ const authReducer = (state = initialState, action) => {
       setAuthToken();
       // payload: [{msg: "Invalid credentials"}, {msg:"..."}]
       return {
-        ...state,
+        ...initialState,
         isAuthenticated: false,
         isLoading: false,
         user: null,

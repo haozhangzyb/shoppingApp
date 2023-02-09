@@ -32,7 +32,8 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch(getCart());
   } catch (err) {
-    console.error(err.response.data.errors);
+    // console.error(err.response.data.errors);
+    console.error(err);
     dispatch({
       type: AUTH_ERROR,
     });
