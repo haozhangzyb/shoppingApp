@@ -56,11 +56,12 @@ const DiscountArea = () => {
           value={formikFormData.values.couponCode}
           error={
             formikFormData.touched.couponCode &&
-            Boolean(formikFormData.errors.couponCode)
+            Boolean(formikFormData.errors.couponCode || cartState.error)
           }
           helperText={
-            formikFormData.touched.couponCode &&
-            formikFormData.errors.couponCode
+            (formikFormData.touched.couponCode &&
+              formikFormData.errors.couponCode) ||
+            cartState.error
           }
         />
         <Button

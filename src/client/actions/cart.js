@@ -12,6 +12,7 @@ import {
   CLEAR_LOCAL_CART,
   APPLY_COUPON,
   REMOVE_COUPON,
+  CLEAR_CART_ERRORS,
 } from "./types";
 
 export const getCart = () => async (dispatch) => {
@@ -151,9 +152,13 @@ export const applyCoupon = (coupon) => async (dispatch) => {
           .join(","),
       });
 
-      errors.forEach((error) =>
-        dispatch(addAlert(error.msg, AlertTypes.INFO))
-      );
+      // errors.forEach((error) =>
+      //   dispatch(addAlert(error.msg, AlertTypes.INFO))
+      // );
+
+      setTimeout(() => {
+        dispatch(clearCartErrors());
+      }, 2000);
     }
   }
 };
@@ -180,9 +185,19 @@ export const removeCoupon = (couponId) => async (dispatch) => {
           .join(","),
       });
 
-      errors.forEach((error) =>
-        dispatch(addAlert(error.msg, AlertTypes.INFO))
-      );
+      // errors.forEach((error) =>
+      //   dispatch(addAlert(error.msg, AlertTypes.INFO))
+      // );
+
+      setTimeout(() => {
+        dispatch(clearCartErrors());
+      }, 2000);
     }
   }
+};
+
+export const clearCartErrors = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_CART_ERRORS,
+  });
 };

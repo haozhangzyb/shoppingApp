@@ -7,6 +7,7 @@ import {
   CART_ERROR,
   APPLY_COUPON,
   REMOVE_COUPON,
+  CLEAR_CART_ERRORS,
 } from "../actions/types";
 
 const initialState = {
@@ -35,7 +36,6 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         ...payload,
         isLoading: false,
-        error: "",
       };
     case CLEAR_LOCAL_CART:
       return {
@@ -48,6 +48,12 @@ const cartReducer = (state = initialState, action) => {
         isLoading: false,
         error: payload,
       };
+    case CLEAR_CART_ERRORS:
+      return {
+        ...state,
+        error: "",
+      };
+
     default:
       return state;
   }
