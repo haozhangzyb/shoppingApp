@@ -3,6 +3,7 @@ const router = express.Router();
 
 import Product from "../../models/Product.js";
 import Cart from "../../models/Cart.js";
+import User from "../../models/User.js";
 import jwtTokenToUserId from "../../middleware/jwtTokenToUserId.js";
 
 const numberfy = (num) => Number(Number(num).toFixed(2));
@@ -12,9 +13,12 @@ const numberfy = (num) => Number(Number(num).toFixed(2));
 // @access  Private
 router.get("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id });
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
     if (!cart) {
-      cart = new Cart({ user: req.user._id, products: [] });
+      cart = new Cart({ user: userId, products: [] });
       cart = await cart.save();
     }
 
@@ -30,9 +34,12 @@ router.get("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.post("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id });
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
     if (!cart) {
-      cart = new Cart({ user: req.user._id, products: [] });
+      cart = new Cart({ user: userId, products: [] });
     }
 
     let product = await Product.findById(req.body.productId);
@@ -78,7 +85,11 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.delete("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id });
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
+
     if (!cart) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }
@@ -119,7 +130,11 @@ router.delete("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.put("/", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id });
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
+
     if (!cart) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }
@@ -168,9 +183,12 @@ router.put("/", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.post("/coupon", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id });
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
     if (!cart) {
-      cart = new Cart({ user: req.user._id, products: [] });
+      cart = new Cart({ user: userId, products: [] });
     }
 
     // if (cart.products.length === 0) {
@@ -226,7 +244,10 @@ router.post("/coupon", jwtTokenToUserId, async (req, res) => {
 // @access  Private
 router.delete("/coupon", jwtTokenToUserId, async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user._id });
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
     if (!cart) {
       return res.status(400).json({ errors: [{ msg: "Cart is empty" }] });
     }

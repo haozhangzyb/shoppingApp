@@ -42,7 +42,7 @@ const Footer = () => {
         pt={1.6}
       >
         <Typography variant='subtitle1'>
-          ©2022 All Rights Reserved
+          ©2023 All Rights Reserved
         </Typography>
       </Grid>
       <Grid
