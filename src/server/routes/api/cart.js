@@ -297,9 +297,9 @@ router.post("/sync", jwtTokenToUserId, async (req, res) => {
     userId = userId._id;
 
     let cart = await Cart.findOne({ user: userId });
-    if (cart.products.length) {
-      return res.status(200).json(cart);
-    }
+    // if (cart.products.length) {
+    //   return res.status(200).json(cart);
+    // }
 
     if (!cart) {
       cart = new Cart({ user: userId, products: [] });
