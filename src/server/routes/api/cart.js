@@ -29,6 +29,35 @@ router.get("/", jwtTokenToUserId, async (req, res) => {
   }
 });
 
+const addProductToCart = (cart, product) => {
+  const isProductInCart = cart.products.some(
+    (p) => p._id.toString() === product._id.toString()
+  );
+  if (isProductInCart) {
+    cart.products = cart.products.map((p) => {
+      if (p._id.toString() == product._id.toString()) {
+        p.inCartQuantity += 1;
+      }
+      return p;
+    });
+  } else {
+    const { _id, name, price, image_url } = product;
+    product = { _id, name, price, image_url, inCartQuantity: 1 };
+
+    cart.products.push(product);
+  }
+
+  cart.totalQuantity += 1;
+  cart.subtotal = numberfy(cart.subtotal + product.price);
+  cart.tax = numberfy(cart.subtotal * 0.1);
+  cart.total = Math.max(
+    0,
+    numberfy(cart.subtotal + cart.tax - cart.discount)
+  );
+
+  return cart;
+};
+
 // @route   POST api/cart
 // @desc    Add product to cart
 // @access  Private
@@ -46,31 +75,7 @@ router.post("/", jwtTokenToUserId, async (req, res) => {
     if (!product)
       return res.status(400).json({ msg: "Product not found" });
 
-    if (
-      cart.products.some(
-        (p) => p._id.toString() === product._id.toString()
-      )
-    ) {
-      cart.products = cart.products.map((p) => {
-        if (p._id.toString() == product._id.toString()) {
-          p.inCartQuantity += 1;
-        }
-        return p;
-      });
-    } else {
-      const { _id, name, price, image_url } = product;
-      product = { _id, name, price, image_url, inCartQuantity: 1 };
-
-      cart.products.push(product);
-    }
-
-    cart.totalQuantity += 1;
-    cart.subtotal = numberfy(cart.subtotal + product.price);
-    cart.tax = numberfy(cart.subtotal * 0.1);
-    cart.total = Math.max(
-      0,
-      numberfy(cart.subtotal + cart.tax - cart.discount)
-    );
+    cart = addProductToCart(cart, product);
 
     cart = await cart.save();
     return res.status(200).json(cart);
@@ -276,6 +281,42 @@ router.delete("/coupon", jwtTokenToUserId, async (req, res) => {
     );
 
     cart = await cart.save();
+    return res.status(200).json(cart);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+});
+
+// @route   POST api/cart/sync
+// @desc    sync local cart with server cart
+// @access  Private
+router.post("/sync", jwtTokenToUserId, async (req, res) => {
+  try {
+    let userId = await User.findById(req.user.id);
+    userId = userId._id;
+
+    let cart = await Cart.findOne({ user: userId });
+    if (cart.products.length) {
+      return res.status(200).json(cart);
+    }
+
+    if (!cart) {
+      cart = new Cart({ user: userId, products: [] });
+    }
+
+    if (!req.body.products) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Products are required" }] });
+    }
+
+    req.body.products.forEach((p) => {
+      cart = addProductToCart(cart, p);
+    });
+
+    cart = await cart.save();
+
     return res.status(200).json(cart);
   } catch (err) {
     console.error(err);

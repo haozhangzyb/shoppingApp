@@ -85,10 +85,10 @@ const Header = () => {
     (state) => state.productReducer.searchInput
   );
 
-  useEffect(() => {
-    if (isAuthenticated) dispatch(getCart());
-    // dispatch(getCart());
-  }, [cartStateJson, dispatch]);
+  // useEffect(() => {
+  //   // if (isAuthenticated) dispatch(getCart());
+  //   dispatch(getCart());
+  // }, [cartStateJson, dispatch]);
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));

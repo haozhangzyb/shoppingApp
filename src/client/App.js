@@ -34,7 +34,7 @@ function App() {
       // try to fetch a user, if no token or invalid token we
       // will get a 401 response from our API
       store.dispatch(loadUser());
-      store.dispatch(getCart());
+      // store.dispatch(getCart());
     } else {
       store.dispatch(loadingEnd());
     }

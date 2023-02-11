@@ -21,10 +21,10 @@ const CartModal = () => {
     (state) => state.authReducer.isAuthenticated
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (isAuthenticated) dispatch(getCart());
-    // dispatch(getCart());
-  }, [cartStateJson, dispatch]);
+  // useEffect(() => {
+  //   // if (isAuthenticated) dispatch(getCart());
+  //   dispatch(getCart());
+  // }, [cartStateJson, dispatch]);
 
   const handleCartModalClose = () => {
     closeCartModal()(dispatch);

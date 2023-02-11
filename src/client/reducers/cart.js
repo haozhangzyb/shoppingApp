@@ -8,6 +8,8 @@ import {
   APPLY_COUPON,
   REMOVE_COUPON,
   CLEAR_CART_ERRORS,
+  GET_LOCAL_CART,
+  SYNC_LOCAL_CART,
 } from "../actions/types";
 
 const initialState = {
@@ -32,6 +34,7 @@ const cartReducer = (state = initialState, action) => {
     case REMOVE_ALL_FROM_CART:
     case APPLY_COUPON:
     case REMOVE_COUPON:
+    case SYNC_LOCAL_CART:
       return {
         ...state,
         ...payload,
@@ -39,7 +42,14 @@ const cartReducer = (state = initialState, action) => {
       };
     case CLEAR_LOCAL_CART:
       return {
-        ...initialState,
+        products: [],
+        error: "",
+        totalQuantity: 0,
+        subtotal: 0.0,
+        tax: 0.0,
+        coupons: [],
+        discount: 0.0,
+        total: 0.0,
         isLoading: false,
       };
     case CART_ERROR:
@@ -52,6 +62,10 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         error: "",
+      };
+    case GET_LOCAL_CART:
+      return {
+        ...state,
       };
 
     default:
