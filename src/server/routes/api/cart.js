@@ -312,7 +312,9 @@ router.post("/sync", jwtTokenToUserId, async (req, res) => {
     }
 
     req.body.products.forEach((p) => {
-      cart = addProductToCart(cart, p);
+      for (let i = 0; i < p.inCartQuantity; i++) {
+        cart = addProductToCart(cart, p);
+      }
     });
 
     cart = await cart.save();
