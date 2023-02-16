@@ -32,7 +32,7 @@ export const loadUser = () => async (dispatch) => {
 
     syncLocalCart()(dispatch);
 
-    dispatch(getCart());
+    // dispatch(getCart());
   } catch (err) {
     // console.error(err.response.data.errors);
     console.error(err);

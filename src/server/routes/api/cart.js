@@ -306,9 +306,8 @@ router.post("/sync", jwtTokenToUserId, async (req, res) => {
     }
 
     if (!req.body.products) {
-      return res
-        .status(400)
-        .json({ errors: [{ msg: "Products are required" }] });
+      cart = await cart.save();
+      return res.status(200).json(cart);
     }
 
     req.body.products.forEach((p) => {

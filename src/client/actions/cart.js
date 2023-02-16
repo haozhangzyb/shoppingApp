@@ -325,7 +325,7 @@ export const removeAllFromLocalCart = (productId) => async (dispatch) => {
 export const syncLocalCart = () => async (dispatch) => {
   try {
     let cartState = store.getState().cartReducer;
-    if (!cartState.products.length) return;
+    // if (!cartState.products.length) return;
 
     const res = await axios.post(`/api/cart/sync`, {
       products: cartState.products,
